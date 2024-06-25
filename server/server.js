@@ -26,6 +26,6 @@ app.use('/api/orders', orderRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4404;
 
 app.listen(PORT, console.log(`Server running on port ${PORT}`));
