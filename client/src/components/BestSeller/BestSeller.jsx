@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import MainContext from '../../context/context';
 
 const BestSeller = () => {
-    const [products, setProducts] = useState([]);
+    const { products } = useContext(MainContext)
     const [selectedTab, setSelectedTab] = useState('featured');
 
     useEffect(() => {
@@ -24,28 +25,25 @@ const BestSeller = () => {
     }, []);
 
     const renderProducts = (category) => {
-        return products.filter(product => product.category === category).map(product => (
+        return products.map(product => (
             <div className="product-cart-wrap" key={product.id}>
                 <div className="product-img-action-wrap">
                     <div className="product-img product-img-zoom">
                         <Link to={`/shop-product-right/${product.id}`}>
                             <img className="default-img" src={product.image} alt={product.name} />
-                            <img className="hover-img" src={product.imageHover} alt={product.name} />
+                            {/* <img className="hover-img" src={product.imageHover} alt={product.name} /> */}
                         </Link>
                     </div>
                     <div className="product-action-1">
-                        <a aria-label="Quick view" className="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                        <Link to="/id" aria-label="Quick view" className="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
                             <i className="fa-sharp fa-thin fa-eye"></i>
-                        </a>
+                        </Link>
                         <Link aria-label="Add To Wishlist" className="action-btn small hover-up" to="/shop-wishlist">
                             <i className="fa-sharp fa-thin fa-heart"></i>
                         </Link>
                         <Link aria-label="Compare" className="action-btn small hover-up" to="/shop-compare">
                             <i className="fa-sharp fa-thin fa-shuffle"></i>
                         </Link>
-                    </div>
-                    <div className="product-badges product-badges-position product-badges-mrg">
-                        <span className="new">{product.badge}</span>
                     </div>
                 </div>
                 <div className="product-content-wrap">

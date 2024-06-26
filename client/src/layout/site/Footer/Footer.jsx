@@ -142,7 +142,7 @@ const Footer = () => {
               </div>
             </div>
             <div className="footer-link-widget col wow animate__ animate__fadeInUp animated" data-wow-delay=".1s">
-              <h4 class=" widget-title" style={{ visibility: 'visible', animationName: 'fadeInUp' }}>Company</h4>
+              <h4 className=" widget-title" style={{ visibility: 'visible', animationName: 'fadeInUp' }}>Company</h4>
               <ul className="footer-list mb-sm-5 mb-md-0">
                 <li><Link to="#">About Us</Link></li>
                 <li><Link to="#">Delivery Information</Link></li>
@@ -228,7 +228,7 @@ const Footer = () => {
               <Link to="#"><img src={iconPinterest} alt="" /></Link>
               <Link to="#"><img src={iconYoutube} alt="" /></Link>
             </div>
-            <p class="font-sm">Up to 15% discount on your first subscribe</p>
+            <p className="font-sm">Up to 15% discount on your first subscribe</p>
           </div>
         </div>
       </div>

@@ -1,6 +1,10 @@
-const express = require('express');
-const { addOrderItems, getOrderById, getMyOrders } = require('../controllers/orderController');
-const { protect } = require('../middlewares/authMiddleware');
+const express = require("express");
+const {
+  addOrderItems,
+  getOrderById,
+  getMyOrders,
+} = require("../controllers/orderController");
+const { protect } = require("../middlewares/authMiddleware");
 const router = express.Router();
 
 router.post('/', protect, addOrderItems);

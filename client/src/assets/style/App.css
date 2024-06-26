@@ -104,7 +104,7 @@ li.hr span {
   display: block;
 }
 
-/*--- Common Classes---------------------*/
+/*--- Common classNamees---------------------*/
 ::-moz-selection {
   background: #3BB77E; /* WebKit/Blink Browsers */
   color: #fff;
@@ -3452,6 +3452,12 @@ table .product-thumbnail img {
   font-size: 18px;
   font-weight: bold;
   color: #3BB77E;
+}
+.product-cart-wrap .product-content-wrap .product-price span span{
+  font-weight: normal;
+  font-size: 14px;
+  padding-left: 2px;
+  
 }
 .product-cart-wrap .product-content-wrap .product-price span.new-price {
   color: #3BB77E;

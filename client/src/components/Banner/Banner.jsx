@@ -19,7 +19,7 @@ const Banner = () => {
                                     <br />
                                     Products
                                 </h4>
-                                <Link className="btn btn-xs" href="/shop-grid-right">
+                                <Link className="btn btn-xs" to="/shop">
                                     Shop Now <i className="fa-thin fa-arrow-right d-flex align-items-center" ></i>
                                 </Link>
                             </div>
@@ -34,7 +34,7 @@ const Banner = () => {
                                     <br />
                                     Healthy and Easy
                                 </h4>
-                                <Link className="btn btn-xs" href="/shop-grid-right">
+                                <Link className="btn btn-xs" to="/shop">
                                     Shop Now <i className="fa-thin fa-arrow-right d-flex align-items-center"></i>
                                 </Link>
                             </div>
@@ -48,7 +48,7 @@ const Banner = () => {
                                     The best Organic <br />
                                     Products Online
                                 </h4>
-                                <Link className="btn btn-xs" href="/shop-grid-right">
+                                <Link className="btn btn-xs" to="/shop">
                                     Shop Now <i className="fa-thin fa-arrow-right d-flex align-items-center"></i>
                                 </Link>
                             </div>

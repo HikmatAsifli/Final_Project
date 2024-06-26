@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ROUTES from "./routes/routes";
 import MainContext from "./context/context";
@@ -10,13 +10,22 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import "./assets/style/App.css"
+import axios from "axios";
 
 const App = () => {
-  const [data, setData] = useState([])
+  const [products, setProducts] = useState([])
   const router = createBrowserRouter(ROUTES);
+
+  useEffect(() => {
+    axios.get("http://localhost:4404/api/products/")
+      .then((res) => {
+        setProducts([...res.data])
+      });
+  }, []);
+
   const contextData = {
-    data,
-    setData
+    products,
+    setProducts
   };
   return (
     <>
