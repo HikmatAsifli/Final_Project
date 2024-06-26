@@ -1533,6 +1533,11 @@ input.qty-val {
   background-size: cover;
   background-position: center;
 }
+.col-lg-9 .slick-track{
+  width: calc(350px * 4)!important;
+  display: flex;
+  gap: 10px;
+}
 .hero-slider-1 {
   position: relative;
 }
@@ -10351,6 +10356,7 @@ footer .hotline img {
   .mb-xs-30 {
     margin-bottom: 30px !important;
   }
+  
   .slick-track .product-cart-wrap {
     margin-bottom: 0 !important;
   }

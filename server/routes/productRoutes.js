@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/", getAllProducts);
 
-router.post("/", protect, createProduct);
+router.post("/",  createProduct);
 
 router.put("/:id", protect, updateProduct);
 

@@ -1,56 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import MainContext from '../../context/context';
 
 const DealsOfTheDay = () => {
-    const [products, setProducts] = useState([]);
+    const { products } = useContext(MainContext);
+    const dealsOfTheDay = products.filter(product => product.dealsOfTheDay === true);
+
+    const calculateTimeLeft = (endTime) => {
+        const difference = +new Date(endTime) - +new Date();
+        let timeLeft = {};
+
+        if (difference > 0) {
+            timeLeft = {
+                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+                minutes: Math.floor((difference / 1000 / 60) % 60),
+                seconds: Math.floor((difference / 1000) % 60)
+            };
+        }
+
+        return timeLeft;
+    };
+
+    const [timeLeft, setTimeLeft] = useState({});
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await axios.get('https://api.example.com/products');
-                setProducts(response.data);
-            } catch (error) {
-                console.error('Error fetching data: ', error);
-            }
-        };
-
-        fetchProducts();
-    }, []);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            const updatedProducts = products.map(product => {
-                const countdownDate = new Date(product.countdownDate).getTime();
-                const now = new Date().getTime();
-                let distance = countdownDate - now;
-
-                if (distance < 0) {
-                    clearInterval(interval);
-                    distance = 0;
-                }
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                return {
-                    ...product,
-                    currentCountdown: {
-                        days,
-                        hours,
-                        minutes,
-                        seconds
-                    }
-                };
+        const timer = setTimeout(() => {
+            dealsOfTheDay.forEach((product, index) => {
+                const newTimeLeft = calculateTimeLeft(product.dealsOfTheDayEndTime);
+                setTimeLeft(prevTimeLeft => ({ ...prevTimeLeft, [product.id]: newTimeLeft }));
             });
-
-            setProducts(updatedProducts);
         }, 1000);
 
-        return () => clearInterval(interval);
-    }, [products]);
+        return () => clearTimeout(timer);
+    });
 
     return (
         <section className="section-padding pb-5">
@@ -63,7 +46,7 @@ const DealsOfTheDay = () => {
                     </Link>
                 </div>
                 <div className="row">
-                    {products.map(product => (
+                    {dealsOfTheDay.map(product => (
                         <div key={product.id} className="col-xl-3 col-lg-4 col-md-6">
                             <div className="product-cart-wrap style-2 wow animate__ animate__fadeInUp animated" data-wow-delay={0} style={{ visibility: 'visible', animationName: 'fadeInUp' }}>
                                 <div className="product-img-action-wrap">
@@ -76,37 +59,53 @@ const DealsOfTheDay = () => {
                                 <div className="product-content-wrap">
                                     <div className="deals-countdown-wrap">
                                         <div className="deals-countdown">
-                                            <span className="countdown-section">
-                                                <span className="countdown-amount hover-up">{product.currentCountdown.days}</span>
-                                                <span className="countdown-period"> days </span>
-                                            </span>
-                                            <span className="countdown-section">
-                                                <span className="countdown-amount hover-up">{product.currentCountdown.hours}</span>
-                                                <span className="countdown-period"> hours </span>
-                                            </span>
-                                            <span className="countdown-section">
-                                                <span className="countdown-amount hover-up">{product.currentCountdown.minutes}</span>
-                                                <span className="countdown-period"> mins </span>
-                                            </span>
-                                            <span className="countdown-section">
-                                                <span className="countdown-amount hover-up">{product.currentCountdown.seconds}</span>
-                                                <span className="countdown-period"> sec </span>
-                                            </span>
+                                            {timeLeft[product.id] ? (
+                                                <>
+                                                    <span className="countdown-section">
+                                                        <span className="countdown-amount hover-up">{timeLeft[product.id].days}</span>
+                                                        <span className="countdown-period"> days </span>
+                                                    </span>
+                                                    <span className="countdown-section">
+                                                        <span className="countdown-amount hover-up">{timeLeft[product.id].hours}</span>
+                                                        <span className="countdown-period"> hours </span>
+                                                    </span>
+                                                    <span className="countdown-section">
+                                                        <span className="countdown-amount hover-up">{timeLeft[product.id].minutes}</span>
+                                                        <span className="countdown-period"> mins </span>
+                                                    </span>
+                                                    <span className="countdown-section">
+                                                        <span className="countdown-amount hover-up">{timeLeft[product.id].seconds}</span>
+                                                        <span className="countdown-period"> sec </span>
+                                                    </span>
+                                                </>
+                                            ) : (
+                                                <span>Deal has ended</span>
+                                            )}
                                         </div>
                                     </div>
                                     <div className="deals-content">
                                         <h2><Link to={`/shop-product-right/${product.id}`}>{product.name}</Link></h2>
                                         <div className="product-card-bottom">
                                             <div className="product-price">
-                                                <span>${product.price}</span>
-                                                {product.oldPrice && <span className="old-price">${product.oldPrice}</span>}
+                                                {product.discount > 0 ? (
+                                                    <>
+                                                        <span className='new-price'>
+                                                            {`$${(product.price - (product.price * (product.discount / 100))).toFixed(2)}`}
+                                                            <span>
+                                                                ({product.discount} % off)
+                                                            </span>
+                                                        </span>
+                                                        <span className="old-price">
+                                                            {`$${product.price}`}
+                                                        </span>
+                                                    </>
+                                                ) : (
+                                                    <span>{`$${product.price}`}</span>
+                                                )}
                                             </div>
                                             <div className="add-cart">
                                                 <Link className="add" to="/shop-cart"><i className="fa-light fa-cart-shopping mr-5"></i>Add </Link>
                                             </div>
-                                        </div>
-                                        <div>
-                                            <span className="font-small text-muted">By <Link to={product.vendor.link}>{product.vendor.name}</Link></span>
                                         </div>
                                     </div>
                                 </div>

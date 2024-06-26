@@ -9,29 +9,16 @@ import MainContext from '../../context/context';
 const BestSeller = () => {
     const { products } = useContext(MainContext)
     const [selectedTab, setSelectedTab] = useState('featured');
-
-    useEffect(() => {
-        axios.get('/api/products')
-            .then(response => {
-                if (Array.isArray(response.data)) {
-                    setProducts(response.data);
-                } else {
-                    console.error("Fetched data is not an array:", response.data);
-                }
-            })
-            .catch(error => {
-                console.error("There was an error fetching the products!", error);
-            });
-    }, []);
+    const dailyBestSells = products.filter(product => product.dailyBestSells === true);
 
     const renderProducts = (category) => {
-        return products.map(product => (
+        return dailyBestSells.map(product => (
             <div className="product-cart-wrap" key={product.id}>
                 <div className="product-img-action-wrap">
                     <div className="product-img product-img-zoom">
                         <Link to={`/shop-product-right/${product.id}`}>
                             <img className="default-img" src={product.image} alt={product.name} />
-                            {/* <img className="hover-img" src={product.imageHover} alt={product.name} /> */}
+                            <img className="hover-img" src={product.hoverImage} alt={product.name} />
                         </Link>
                     </div>
                     <div className="product-action-1">
@@ -55,8 +42,21 @@ const BestSeller = () => {
                         <div className="product-rating" style={{ width: `${product.rating * 20}%` }} />
                     </div>
                     <div className="product-price mt-10">
-                        <span>${product.price} </span>
-                        {product.oldPrice && <span className="old-price">${product.oldPrice}</span>}
+                        {product.discount > 0 ? (
+                            <>
+                                <span className='new-price'>
+                                    {`$${(product.price - (product.price * (product.discount / 100))).toFixed(2)}`}
+                                    <span>
+                                        ({product.discount} % off)
+                                    </span>
+                                </span>
+                                <span className="old-price">
+                                    {`$${product.price}`}
+                                </span>
+                            </>
+                        ) : (
+                            <span>{`$${product.price}`}</span>
+                        )}
                     </div>
                     <div className="sold mt-15 mb-15">
                         <div className="progress mb-5">
@@ -129,7 +129,7 @@ const BestSeller = () => {
                         <div className="banner-img style-2">
                             <div className="banner-text">
                                 <h2 className="mb-100">Bring nature into your home</h2>
-                                <Link className="btn btn-xs" to="/shop-grid-right">Shop Now <i className="fa-sharp fa-thin fa-arrow-right"></i></Link>
+                                <Link className="btn btn-xs" to="/shop-grid-right">Shop Now <i className="fa-sharp fa-thin fa-arrow-right d-flex align-items-center"></i></Link>
                             </div>
                         </div>
                     </div>
