@@ -7,7 +7,8 @@ import cart from "../../../assets/images/theme/icons/icon-cart.svg"
 import user from "../../../assets/images/theme/icons/icon-user.svg"
 import headphone from "../../../assets/images/theme/icons/icon-headphone.svg"
 import hot from "../../../assets/images/theme/icons/icon-hot.svg"
-
+import bannerMenu from "../../../assets/images/banner/banner-menu.png"
+import thumbnail3 from "../../../assets/images/shop/thumbnail-3.jpg"
 
 
 
@@ -24,10 +25,10 @@ const Header = () => {
                             <div className="col-xl-3 col-lg-4">
                                 <div className="header-info">
                                     <ul>
-                                        <li><Link to="page-about.htlm">About Us</Link></li>
-                                        <li><Link to="/page-account">My Account</Link></li>
-                                        <li><Link to="/shop-wishlist">Wishlist</Link></li>
-                                        <li><Link to="shop-order.html">Order Tracking</Link></li>
+                                        <li><Link to="/about">About Us</Link></li>
+                                        <li><Link to="/account">My Account</Link></li>
+                                        <li><Link to="/wishlist">Wishlist</Link></li>
+                                        <li><Link to="/order">Order Tracking</Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -35,10 +36,10 @@ const Header = () => {
                                 <div className="text-center">
                                     <div id="news-flash" className="d-inline-block" style={{ overflow: "hidden", position: "relative", height: "14px" }}>
                                         <ul style={{ position: "absolute", margin: "0px", padding: "0px", top: "0px" }}>
-
-
-
-                                            <li style={{ margin: "0px", padding: "0px", height: "14px" }}>100% Secure delivery without contacting the courier</li><li style={{ margin: "0px", padding: "0px", height: "14px" }}>Supper Value Deals - Save more with coupons</li><li style={{ margin: "0px", padding: "0px", height: "14px" }}>Trendy 25silver jewelry, save up 35% off today</li></ul>
+                                            <li style={{ margin: "0px", padding: "0px", height: "14px" }}>100% Secure delivery without contacting the courier</li>
+                                            <li style={{ margin: "0px", padding: "0px", height: "14px" }}>Supper Value Deals - Save more with coupons</li>
+                                            <li style={{ margin: "0px", padding: "0px", height: "14px" }}>Trendy 25silver jewelry, save up 35% off today</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +57,9 @@ const Header = () => {
                     <div className="container">
                         <div className="header-wrap">
                             <div className="logo logo-width-1">
-                                <Link to="/"><img src={logo} alt="logo" /></Link>
+                                <Link to="/">
+                                    <img src={logo} alt="logo" />
+                                </Link>
                             </div>
                             <div className="header-right">
                                 <div className="search-style-2">
@@ -78,7 +81,8 @@ const Header = () => {
                                             <span className="selection">
                                                 <span className="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabIndex="0" aria-labelledby="select2-pbse-container">
                                                     <span className="select2-selection__rendered" id="select2-pbse-container" role="textbox" aria-readonly="true" title="All Categories">
-                                                        All Categories <i className="fa-thin fa-angle-down" role="presentation">
+                                                        All Categories
+                                                        <i className="fa-thin fa-angle-down" role="presentation">
                                                             <b role="presentation"></b>
                                                         </i>
                                                     </span>
@@ -93,49 +97,67 @@ const Header = () => {
                                 <div className="header-action-right">
                                     <div className="header-action-2">
                                         <div className="header-action-icon-2">
-                                            <Link to="/shop-compare">
+                                            <Link to="/compare">
                                                 <img className="svgInject" alt="Nest" src={compare} />
                                                 <span className="pro-count blue">3</span>
                                             </Link>
-                                            <a to="/shop-compare"><span className="lable ml-0">Compare</span></a>
+                                            <Link to="/compare">
+                                                <span className="lable ml-0">Compare</span>
+                                            </Link>
                                         </div>
                                         <div className="header-action-icon-2">
-                                            <Link to="/shop-wishlist">
+                                            <Link to="/wishlist">
                                                 <img className="svgInject" alt="Nest" src={heart} />
                                                 <span className="pro-count blue">6</span>
                                             </Link>
-                                            <Link to="/shop-wishlist"><span className="lable">Wishlist</span></Link>
+                                            <Link to="/wishlist">
+                                                <span className="lable">Wishlist</span>
+                                            </Link>
                                         </div>
                                         <div className="header-action-icon-2">
-                                            <a className="mini-cart-icon" to="/shop-cart">
+                                            <Link className="mini-cart-icon" to="/cart">
                                                 <img alt="Nest" src={cart} />
                                                 <span className="pro-count blue">2</span>
-                                            </a>
-                                            <Link to="/shop-cart"><span className="lable">Cart</span></Link>
+                                            </Link>
+                                            <Link to="/cart">
+                                                <span className="lable">Cart</span>
+                                            </Link>
                                             <div className="cart-dropdown-wrap cart-dropdown-hm2">
                                                 <ul>
                                                     <li>
                                                         <div className="shopping-cart-img">
-                                                            <Link to="/shop-product-right"><img alt="Nest" src="assets/imgs/shop/thumbnail-3.jpg" /></Link>
+                                                            <Link to="/shop">
+                                                                <img alt="Nest" src={thumbnail3} />
+                                                            </Link>
                                                         </div>
                                                         <div className="shopping-cart-title">
-                                                            <h4><Link to="/shop-product-right">Daisy Casual Bag</Link></h4>
+                                                            <h4>
+                                                                <Link to="/shop">Daisy Casual Bag</Link>
+                                                            </h4>
                                                             <h4><span>1 × </span>$800.00</h4>
                                                         </div>
-                                                        <div className="shopping-cart-delete">
-                                                            <Link to="#"><i className="fi-rs-cross-small"></i></Link>
+                                                    <div className="shopping-cart-delete">
+                                                            <Link to="#">
+                                                                <i className="fi-rs-cross-small"></i>
+                                                            </Link>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div className="shopping-cart-img">
-                                                            <Link to="/shop-product-right"><img alt="Nest" src="assets/imgs/shop/thumbnail-2.jpg" /></Link>
+                                                            <Link to="/shop">
+                                                                <img alt="Nest" src="assets/imgs/shop/thumbnail-2.jpg" />
+                                                            </Link>
                                                         </div>
                                                         <div className="shopping-cart-title">
-                                                            <h4><Link to="/shop-product-right">Corduroy Shirts</Link></h4>
+                                                            <h4>
+                                                                <Link to="/shop">Corduroy Shirts</Link>
+                                                            </h4>
                                                             <h4><span>1 × </span>$3200.00</h4>
                                                         </div>
                                                         <div className="shopping-cart-delete">
-                                                            <Link to="#"><i className="fi-rs-cross-small"></i></Link>
+                                                            <Link to="#">
+                                                                <i className="fi-rs-cross-small"></i>
+                                                            </Link>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -151,29 +173,49 @@ const Header = () => {
                                             </div>
                                         </div>
                                         <div className="header-action-icon-2">
-                                            <Link to="/page-account">
+                                            <Link to="/account">
                                                 <img className="svgInject" alt="Nest" src={user} />
                                             </Link>
-                                            <Link to="/page-account"><span className="lable ml-0">Account</span></Link>
+                                            <Link to="/account">
+                                                <span className="lable ml-0">Account</span>
+                                            </Link>
                                             <div className="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                                 <ul>
                                                     <li>
-                                                        <Link to="/page-account"><i className="fi fi-rs-user mr-10"></i>My Account</Link>
+                                                        <Link to="/account">
+                                                            <i className="fa-sharp fa-thin fa-user mr-10"></i>
+                                                            My Account
+                                                        </Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="/page-account"><i className="fi fi-rs-location-alt mr-10"></i>Order Tracking</Link>
+                                                        <Link to="/account">
+                                                            <i className="fa-sharp fa-thin fa-location-dot mr-10"></i>
+                                                            Order Tracking
+                                                        </Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="/page-account"><i className="fi fi-rs-label mr-10"></i>My Voucher</Link>
+                                                        <Link to="/account">
+                                                            <i className="fa-sharp fa-thin fa-tag mr-10"></i>
+                                                            My Voucher
+                                                        </Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="/shop-wishlist"><i className="fi fi-rs-heart mr-10"></i>My Wishlist</Link>
+                                                        <Link to="/wishlist">
+                                                            <i className="fa-sharp fa-thin fa-heart mr-10"></i>
+                                                            My Wishlist
+                                                        </Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="/page-account"><i className="fi fi-rs-settings-sliders mr-10"></i>Setting</Link>
+                                                        <Link to="/account">
+                                                            <i className="fa-sharp fa-thin fa-sliders mr-10"></i>
+                                                            Setting
+                                                        </Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="/page-login"><i className="fi fi-rs-sign-out mr-10"></i>Sign out</Link>
+                                                        <Link to="/login">
+                                                            <i className="fa-sharp fa-thin fa-arrow-right-from-bracket mr-10"></i>
+                                                            Sign out
+                                                        </Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -188,52 +230,85 @@ const Header = () => {
                     <div className="container">
                         <div className="header-wrap header-space-between position-relative">
                             <div className="logo logo-width-1 d-block d-lg-none">
-                                <Link to="/"><img src={logo} alt="logo" /></Link>
+                                <Link to="/">
+                                    <img src={logo} alt="logo" />
+                                </Link>
                             </div>
                             <div className="header-nav d-none d-lg-flex">
                                 <div className="main-categori-wrap d-none d-lg-block">
                                     <Link className="categories-button-active" to="#">
-                                        <i className="fa-thin fa-grid-2" style={{ fontSize: "large", paddingRight: "10px", fontWeight: "500" }}></i>
+                                        <i className="fa-sharp fa-thin fa-grid-2" style={{ fontSize: "large", paddingRight: "10px", fontWeight: "500" }}></i>
                                         <span className="et">
                                             Browse
                                         </span>
                                         All Categories
-                                        <i className="fa-thin fa-angle-down" style={{ fontSize: "15px" }}></i>
+                                        <i className="fa-sharp fa-thin fa-angle-down" style={{ fontSize: "15px" }}></i>
                                     </Link>
                                     <div className="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                                         <div className="d-flex categori-dropdown-inner">
                                             <ul>
                                                 <li>
-                                                    <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/category-1.svg" alt="" />Milks and Dairies</Link>
+                                                    <Link to="/shop">
+                                                        <img src="assets/imgs/theme/icons/category-1.svg" alt="" />
+                                                        Milks and Dairies
+                                                    </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/category-2.svg" alt="" />Clothing &amp; beauty</Link>
+                                                    <Link to="/shop">
+                                                        <img src="assets/imgs/theme/icons/category-2.svg" alt="" />
+                                                        Clothing &amp; beauty
+                                                    </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/category-3.svg" alt="" />Pet Foods &amp; Toy</Link>
+                                                    <Link to="/shop">
+                                                        <img src="assets/imgs/theme/icons/category-3.svg" alt="" />
+                                                        Pet Foods &amp; Toy
+                                                    </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/category-4.svg" alt="" />Baking material</Link>
+                                                    <Link to="/shop">
+                                                        <img src="assets/imgs/theme/icons/category-4.svg" alt="" />
+                                                        Baking material
+                                                    </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/category-5.svg" alt="" />Fresh Fruit</Link>
+                                                    <Link to="/shop">
+                                                        <img src="assets/imgs/theme/icons/category-5.svg" alt="" />
+                                                        Fresh Fruit
+                                                    </Link>
                                                 </li>
                                             </ul>
                                             <ul className="end">
                                                 <li>
-                                                    <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/category-6.svg" alt="" />Wines &amp; Drinks</Link>
+                                                    <Link to="/shop">
+                                                        <img src="assets/imgs/theme/icons/category-6.svg" alt="" />
+                                                        Wines &amp; Drinks
+                                                    </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/category-7.svg" alt="" />Fresh Seafood</Link>
+                                                    <Link to="/shop">
+                                                        <img src="assets/imgs/theme/icons/category-7.svg" alt="" />
+                                                        Fresh Seafood
+                                                    </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/category-8.svg" alt="" />Fast food</Link>
+                                                    <Link to="/shop">
+                                                        <img src="assets/imgs/theme/icons/category-8.svg" alt="" />
+                                                        Fast food
+                                                    </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/category-9.svg" alt="" />Vegetables</Link>
+                                                    <Link to="/shop">
+                                                        <img src="assets/imgs/theme/icons/category-9.svg" alt="" />
+                                                        Vegetables
+                                                    </Link>
+
                                                 </li>
                                                 <li>
-                                                    <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/category-10.svg" alt="" />Bread and Juice</Link>
+                                                    <Link to="/shop">
+                                                        <img src="assets/imgs/theme/icons/category-10.svg" alt="" />
+                                                        Bread and Juice
+                                                    </Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -241,18 +316,30 @@ const Header = () => {
                                             <div className="d-flex categori-dropdown-inner">
                                                 <ul>
                                                     <li>
-                                                        <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/icon-1.svg" alt="" />Milks and Dairies</Link>
+                                                        <Link to="/shop">
+                                                            <img src="assets/imgs/theme/icons/icon-1.svg" alt="" />
+                                                            Milks and Dairies
+                                                        </Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/icon-2.svg" alt="" />Clothing &amp; beauty</Link>
+                                                        <Link to="/shop">
+                                                            <img src="assets/imgs/theme/icons/icon-2.svg" alt="" />
+                                                            Clothing &amp; beauty
+                                                        </Link>
                                                     </li>
                                                 </ul>
                                                 <ul className="end">
                                                     <li>
-                                                        <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/icon-3.svg" alt="" />Wines &amp; Drinks</Link>
+                                                        <Link to="/shop">
+                                                            <img src="assets/imgs/theme/icons/icon-3.svg" alt="" />
+                                                            Wines &amp; Drinks
+                                                        </Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="/shop-grid-right"> <img src="assets/imgs/theme/icons/icon-4.svg" alt="" />Fresh Seafood</Link>
+                                                        <Link to="/shop">
+                                                            <img src="assets/imgs/theme/icons/icon-4.svg" alt="" />
+                                                            Fresh Seafood
+                                                        </Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -263,58 +350,63 @@ const Header = () => {
                                 <div className="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                                     <nav>
                                         <ul>
-                                            <li className="hot-deals"><img src={hot} alt="hot deals" /><a to="/shop-grid-right">Deals</a></li>
+                                            <li className="hot-deals">
+                                                <img src={hot} alt="hot deals" />
+                                                <Link to="/shop">Deals</Link>
+                                            </li>
                                             <li>
                                                 <Link className="active" to="/">Home</Link>
                                             </li>
                                             <li>
-                                                <Link to="/page-about">About</Link>
+                                                <Link to="/about">About</Link>
                                             </li>
                                             <li>
-                                                <Link to="/shop-grid-right">Shop</Link>
-                                            </li>
-                                            <li>
-                                                <Link to="#">Vendors</Link>
+                                                <Link to="/shop">Shop</Link>
                                             </li>
                                             <li className="position-static">
-                                                <Link to="#">Mega menu <i className="fa-thin fa-angle-down" style={{ fontSize: "15px" }}></i></Link>
+                                                <Link to="#">
+                                                    Mega menu
+                                                    <i className="fa-thin fa-angle-down" style={{ fontSize: "15px" }}></i>
+                                                </Link>
                                                 <ul className="mega-menu">
                                                     <li className="sub-mega-menu sub-mega-menu-width-22">
-                                                        <a className="menu-title" to="#">Fruit &amp; Vegetables</a>
+                                                        <Link className="menu-title" to="#">Fruit &amp; Vegetables</Link>
                                                         <ul>
-                                                            <li><Link to="/shop-product-right">Meat &amp; Poultry</Link></li>
-                                                            <li><Link to="/shop-product-right">Fresh Vegetables</Link></li>
-                                                            <li><Link to="/shop-product-right">Herbs &amp; Seasonings</Link></li>
-                                                            <li><Link to="/shop-product-right">Cuts &amp; Sprouts</Link></li>
-                                                            <li><Link to="/shop-product-right">Exotic Fruits &amp; Veggies</Link></li>
-                                                            <li><Link to="/shop-product-right">Packaged Produce</Link></li>
+                                                            <li><Link to="/shop">Meat &amp; Poultry</Link></li>
+                                                            <li><Link to="/shop">Fresh Vegetables</Link></li>
+                                                            <li><Link to="/shop">Herbs &amp; Seasonings</Link></li>
+                                                            <li><Link to="/shop">Cuts &amp; Sprouts</Link></li>
+                                                            <li><Link to="/shop">Exotic Fruits &amp; Veggies</Link></li>
+                                                            <li><Link to="/shop">Packaged Produce</Link></li>
                                                         </ul>
                                                     </li>
                                                     <li className="sub-mega-menu sub-mega-menu-width-22">
-                                                        <a className="menu-title" to="#">Breakfast &amp; Dairy</a>
+                                                        <Link className="menu-title" to="#">Breakfast &amp; Dairy</Link>
                                                         <ul>
-                                                            <li><Link to="/shop-product-right">Milk &amp; Flavoured Milk</Link></li>
-                                                            <li><Link to="/shop-product-right">Butter and Margarine</Link></li>
-                                                            <li><Link to="/shop-product-right">Eggs Substitutes</Link></li>
-                                                            <li><Link to="/shop-product-right">Marmalades</Link></li>
-                                                            <li><Link to="/shop-product-right">Sour Cream</Link></li>
-                                                            <li><Link to="/shop-product-right">Cheese</Link></li>
+                                                            <li><Link to="/shop">Milk &amp; Flavoured Milk</Link></li>
+                                                            <li><Link to="/shop">Butter and Margarine</Link></li>
+                                                            <li><Link to="/shop">Eggs Substitutes</Link></li>
+                                                            <li><Link to="/shop">Marmalades</Link></li>
+                                                            <li><Link to="/shop">Sour Cream</Link></li>
+                                                            <li><Link to="/shop">Cheese</Link></li>
                                                         </ul>
                                                     </li>
                                                     <li className="sub-mega-menu sub-mega-menu-width-22">
                                                         <Link className="menu-title" to="#">Meat &amp; Seafood</Link>
                                                         <ul>
-                                                            <li><Link to="/shop-product-right">Breakfast Sausage</Link></li>
-                                                            <li><Link to="/shop-product-right">Dinner Sausage</Link></li>
-                                                            <li><Link to="/shop-product-right">Chicken</Link></li>
-                                                            <li><Link to="/shop-product-right">Sliced Deli Meat</Link></li>
-                                                            <li><Link to="/shop-product-right">Wild Caught Fillets</Link></li>
-                                                            <li><Link to="/shop-product-right">Crab and Shellfish</Link></li>
+                                                            <li><Link to="/shop">Breakfast Sausage</Link></li>
+                                                            <li><Link to="/shop">Dinner Sausage</Link></li>
+                                                            <li><Link to="/shop">Chicken</Link></li>
+                                                            <li><Link to="/shop">Sliced Deli Meat</Link></li>
+                                                            <li><Link to="/shop">Wild Caught Fillets</Link></li>
+                                                            <li><Link to="/shop">Crab and Shellfish</Link></li>
                                                         </ul>
                                                     </li>
                                                     <li className="sub-mega-menu sub-mega-menu-width-34">
                                                         <div className="menu-banner-wrap">
-                                                            <Link to="/shop-product-right"><img src="assets/imgs/banner/banner-menu.png" alt="Nest" /></Link>
+                                                            <Link to="/shop">
+                                                                <img src={bannerMenu} alt="Nest" />
+                                                            </Link>
                                                             <div className="menu-banner-content">
                                                                 <h4>Hot deals</h4>
                                                                 <h3>
@@ -325,7 +417,7 @@ const Header = () => {
                                                                     <span className="new-price text-success">Save to 50%</span>
                                                                 </div>
                                                                 <div className="menu-banner-btn">
-                                                                    <Link to="/shop-product-right">Shop now</Link>
+                                                                    <Link to="/shop">Shop now</Link>
                                                                 </div>
                                                             </div>
                                                             <div className="menu-banner-discount">
@@ -339,26 +431,26 @@ const Header = () => {
                                                 </ul>
                                             </li>
                                             <li>
-                                                <Link to="/blog-category-grid">Blog</Link>
+                                                <Link to="/blog">Blog</Link>
                                             </li>
                                             <li>
                                                 <Link to="#">Pages <i className="fa-thin fa-angle-down" style={{ fontSize: "15px" }}></i></Link>
                                                 <ul className="sub-menu">
-                                                    <li><Link to="/page-about">About Us</Link></li>
-                                                    <li><Link to="/page-contact">Contact</Link></li>
-                                                    <li><Link to="/page-account">My Account</Link></li>
-                                                    <li><Link to="/page-login">Login</Link></li>
-                                                    <li><Link to="/page-register">Register</Link></li>
-                                                    <li><Link to="/page-forgot-password">Forgot password</Link></li>
-                                                    <li><Link to="/page-reset-password">Reset password</Link></li>
-                                                    <li><Link to="/page-purchase-guide">Purchase Guide</Link></li>
-                                                    <li><Link to="/page-privacy-policy">Privacy Policy</Link></li>
-                                                    <li><Link to="/page-terms">Terms of Service</Link></li>
-                                                    <li><Link to="/page-404">404 Page</Link></li>
+                                                    <li><Link to="/about">About Us</Link></li>
+                                                    <li><Link to="/contact">Contact</Link></li>
+                                                    <li><Link to="/account">My Account</Link></li>
+                                                    <li><Link to="/login">Login</Link></li>
+                                                    <li><Link to="/register">Register</Link></li>
+                                                    <li><Link to="/forgot-password">Forgot password</Link></li>
+                                                    <li><Link to="/reset-password">Reset password</Link></li>
+                                                    <li><Link to="/purchase-guide">Purchase Guide</Link></li>
+                                                    <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+                                                    <li><Link to="/terms">Terms of Service</Link></li>
+                                                    <li><Link to="/404">404 Page</Link></li>
                                                 </ul>
                                             </li>
                                             <li>
-                                                <Link to="/page-contact">Contact</Link>
+                                                <Link to="/contact">Contact</Link>
                                             </li>
                                         </ul>
                                     </nav>
@@ -378,7 +470,7 @@ const Header = () => {
                             <div className="header-action-right d-block d-lg-none">
                                 <div className="header-action-2">
                                     <div className="header-action-icon-2">
-                                        <Link to="/shop-wishlist">
+                                        <Link to="/wishlist">
                                             <img alt="Nest" src={heart} />
                                             <span className="pro-count white">4</span>
                                         </Link>
@@ -392,10 +484,10 @@ const Header = () => {
                                             <ul>
                                                 <li>
                                                     <div className="shopping-cart-img">
-                                                        <Link to="/shop-product-right"><img alt="Nest" src="assets/imgs/shop/thumbnail-3.jpg" /></Link>
+                                                        <Link to="/shop"><img alt="Nest" src="assets/imgs/shop/thumbnail-3.jpg" /></Link>
                                                     </div>
                                                     <div className="shopping-cart-title">
-                                                        <h4><Link to="/shop-product-right">Plain Striola Shirts</Link></h4>
+                                                        <h4><Link to="/shop">Plain Striola Shirts</Link></h4>
                                                         <h3><span>1 × </span>$800.00</h3>
                                                     </div>
                                                     <div className="shopping-cart-delete">
@@ -404,10 +496,10 @@ const Header = () => {
                                                 </li>
                                                 <li>
                                                     <div className="shopping-cart-img">
-                                                        <Link to="/shop-product-right"><img alt="Nest" src="assets/imgs/shop/thumbnail-4.jpg" /></Link>
+                                                        <Link to="/shop"><img alt="Nest" src="assets/imgs/shop/thumbnail-4.jpg" /></Link>
                                                     </div>
                                                     <div className="shopping-cart-title">
-                                                        <h4><Link to="/shop-product-right">Macbook Pro 2024</Link></h4>
+                                                        <h4><Link to="/shop">Macbook Pro 2024</Link></h4>
                                                         <h3><span>1 × </span>$3500.00</h3>
                                                     </div>
                                                     <div className="shopping-cart-delete">
@@ -420,8 +512,8 @@ const Header = () => {
                                                     <h4>Total <span>$383.00</span></h4>
                                                 </div>
                                                 <div className="shopping-cart-button">
-                                                    <Link to="/shop-cart">View cart</Link>
-                                                    <Link to="/shop-checkout">Checkout</Link>
+                                                    <Link to="/cart">View cart</Link>
+                                                    <Link to="/checkout">Checkout</Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -468,17 +560,17 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="menu-item-has-children"><span className="menu-expand"><i className="fi-rs-angle-small-down"></i></span>
-                                        <Link to="/shop-grid-right">Shop</Link>
+                                        <Link to="/shop">Shop</Link>
                                         <ul className="dropdown" style={{ display: "none" }}>
-                                            <li><Link to="/shop-grid-right">Shop Grid – Right Sidebar</Link></li>
-                                            <li><Link to="/shop-grid-left">Shop Grid – Left Sidebar</Link></li>
-                                            <li><Link to="/shop-list-right">Shop List – Right Sidebar</Link></li>
-                                            <li><Link to="/shop-list-left">Shop List – Left Sidebar</Link></li>
+                                            <li><Link to="/shop">Shop Grid – Right Sidebar</Link></li>
+                                            <li><Link to="/shop">Shop Grid – Left Sidebar</Link></li>
+                                            <li><Link to="/shop">Shop List – Right Sidebar</Link></li>
+                                            <li><Link to="/shop">Shop List – Left Sidebar</Link></li>
                                             <li><Link to="/shop-fullwidth">Shop - Wide</Link></li>
                                             <li className="menu-item-has-children"><span className="menu-expand"><i className="fi-rs-angle-small-down"></i></span>
                                                 <Link to="#">Single Product</Link>
                                                 <ul className="dropdown" style={{ display: "none" }}>
-                                                    <li><Link to="/shop-product-right">Product – Right Sidebar</Link></li>
+                                                    <li><Link to="/shop">Product – Right Sidebar</Link></li>
                                                     <li><Link to="/shop-product-left">Product – Left Sidebar</Link></li>
                                                     <li><Link to="/shop-product-full">Product – No Sidebar</Link></li>
                                                     <li><Link to="/shop-product-vendor">Product – Vendor Info</Link></li>
@@ -519,28 +611,28 @@ const Header = () => {
                                             <li className="menu-item-has-children"><span className="menu-expand"><i className="fi-rs-angle-small-down"></i></span>
                                                 <Link to="#">Women's Fashion</Link>
                                                 <ul className="dropdown" style={{ display: "none" }}>
-                                                    <li><Link to="/shop-product-right">Dresses</Link></li>
-                                                    <li><Link to="/shop-product-right">Blouses & Shirts</Link></li>
-                                                    <li><Link to="/shop-product-right">Hoodies & Sweatshirts</Link></li>
-                                                    <li><Link to="/shop-product-right">Women's Sets</Link></li>
+                                                    <li><Link to="/shop">Dresses</Link></li>
+                                                    <li><Link to="/shop">Blouses & Shirts</Link></li>
+                                                    <li><Link to="/shop">Hoodies & Sweatshirts</Link></li>
+                                                    <li><Link to="/shop">Women's Sets</Link></li>
                                                 </ul>
                                             </li>
                                             <li className="menu-item-has-children"><span className="menu-expand"><i className="fi-rs-angle-small-down"></i></span>
                                                 <Link to="#">Men's Fashion</Link>
                                                 <ul className="dropdown" style={{ display: "none" }}>
-                                                    <li><Link to="/shop-product-right">Jackets</Link></li>
-                                                    <li><Link to="/shop-product-right">Casual Faux Leather</Link></li>
-                                                    <li><Link to="/shop-product-right">Genuine Leather</Link></li>
+                                                    <li><Link to="/shop">Jackets</Link></li>
+                                                    <li><Link to="/shop">Casual Faux Leather</Link></li>
+                                                    <li><Link to="/shop">Genuine Leather</Link></li>
                                                 </ul>
                                             </li>
                                             <li className="menu-item-has-children"><span className="menu-expand"><i className="fi-rs-angle-small-down"></i></span>
                                                 <Link to="#">Technology</Link>
                                                 <ul className="dropdown" style={{ display: "none" }}>
-                                                    <li><Link to="/shop-product-right">Gaming Laptops</Link></li>
-                                                    <li><Link to="/shop-product-right">Ultraslim Laptops</Link></li>
-                                                    <li><Link to="/shop-product-right">Tablets</Link></li>
-                                                    <li><Link to="/shop-product-right">Laptop Accessories</Link></li>
-                                                    <li><Link to="/shop-product-right">Tablet Accessories</Link></li>
+                                                    <li><Link to="/shop">Gaming Laptops</Link></li>
+                                                    <li><Link to="/shop">Ultraslim Laptops</Link></li>
+                                                    <li><Link to="/shop">Tablets</Link></li>
+                                                    <li><Link to="/shop">Laptop Accessories</Link></li>
+                                                    <li><Link to="/shop">Tablet Accessories</Link></li>
                                                 </ul>
                                             </li>
                                         </ul>

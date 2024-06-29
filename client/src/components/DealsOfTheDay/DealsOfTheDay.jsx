@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import MainContext from '../../context/context';
 
 const DealsOfTheDay = () => {
-    const { products } = useContext(MainContext);
+    const { products, addToBasket } = useContext(MainContext);
     const dealsOfTheDay = products.filter(product => product.dealsOfTheDay === true);
 
     const calculateTimeLeft = (endTime) => {
@@ -40,7 +40,7 @@ const DealsOfTheDay = () => {
             <div className="container">
                 <div className="section-title wow animate__ animate__fadeIn animated" data-wow-delay={0} style={{ visibility: 'visible', animationName: 'fadeIn' }}>
                     <h3 className>Deals Of The Day</h3>
-                    <Link className="show-all" to="/shop-grid-right">
+                    <Link className="show-all" to="/shop">
                         All Deals
                         <i className="fa-sharp fa-thin fa-angle-right"></i>
                     </Link>
@@ -52,7 +52,11 @@ const DealsOfTheDay = () => {
                                 <div className="product-img-action-wrap">
                                     <div className="product-img">
                                         <Link to={`/shop-product-right/${product.id}`}>
-                                            <img src={product.image} alt={product.name} />
+                                            <img
+                                                src={product.image}
+                                                alt={product.name}
+                                                style={{ height: "300px"}}
+                                            />
                                         </Link>
                                     </div>
                                 </div>
@@ -104,7 +108,10 @@ const DealsOfTheDay = () => {
                                                 )}
                                             </div>
                                             <div className="add-cart">
-                                                <Link className="add" to="/shop-cart"><i className="fa-light fa-cart-shopping mr-5"></i>Add </Link>
+                                                <Link className="add" to="#" onClick={() => addToBasket(product._id)}>
+                                                    <i className="fa-light fa-cart-shopping mr-5"></i>
+                                                    Add
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

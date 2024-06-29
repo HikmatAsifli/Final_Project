@@ -1,30 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import MainContext from '../../../context/context';
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);
+    const { products, addToBasket } = useContext(MainContext);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [sortOption, setSortOption] = useState('featured');
     const [itemsPerPage, setItemsPerPage] = useState(50);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalItems, setTotalItems] = useState(0);
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await axios.get('/path-to-your-api/products');
-                const data = response.data;
-                setProducts(data);
-                setTotalItems(data.length);
-                setFilteredProducts(data.slice(0, itemsPerPage));
-            } catch (error) {
-                console.error('Error fetching products:', error);
-            }
-        };
-
-        fetchProducts();
-    }, [itemsPerPage]);
 
     useEffect(() => {
         sortProducts(sortOption, products);
@@ -74,7 +58,7 @@ const Shop = () => {
                                 <h1 className="mb-15">Snack</h1>
                                 <div className="breadcrumb">
                                     <Link to="/" rel="nofollow">
-                                    <i className="fa-light fa-house mr-5"></i>
+                                        <i className="fa-light fa-house mr-5"></i>
                                         Home
                                     </Link>
                                 </div>
@@ -89,11 +73,11 @@ const Shop = () => {
             </div>
             <div className="container mb-30" style={{ transform: "none" }}>
                 <div className="row" style={{ transform: "none" }}>
-                    <div className="col-lg-4-5">
+                    <div className="col-lg-4-8">
                         <div className="shop-product-fillter">
                             <div className="totall-product">
                                 <p>
-                                    We found <strong className="text-brand">{totalItems}</strong> items for you!
+                                    We found <strong className="text-brand">{products.length}</strong> items for you!
                                 </p>
                             </div>
                             <div className="sort-by-product-area">
@@ -101,7 +85,7 @@ const Shop = () => {
                                     <div className="sort-by-product-wrap">
                                         <div className="sort-by">
                                             <span>
-                                            <i className="fa-sharp fa-thin fa-grid-2"></i>
+                                                <i className="fa-sharp fa-thin fa-grid-2"></i>
                                                 Show:
                                             </span>
                                         </div>
@@ -142,55 +126,16 @@ const Shop = () => {
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="sort-by-cover">
-                                    <div className="sort-by-product-wrap">
-                                        <div className="sort-by">
-                                            <span>
-                                            <i className="fa-regular fa-grid-2-plus"></i>
-                                                Sort by:
-                                            </span>
-                                        </div>
-                                        <div className="sort-by-dropdown-wrap">
-                                            <span>
-                                                {" "}
-                                                {sortOption} <i className="fa-thin fa-angle-down"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="sort-by-dropdown">
-                                        <ul>
-                                            <li>
-                                                <Link className={sortOption === 'featured' ? 'active' : ''} onClick={() => handleSortChange('featured')}>
-                                                    Featured
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link className={sortOption === 'price-low-to-high' ? 'active' : ''} onClick={() => handleSortChange('price-low-to-high')}>
-                                                    Price: Low to High
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link className={sortOption === 'price-high-to-low' ? 'active' : ''} onClick={() => handleSortChange('price-high-to-low')}>
-                                                    Price: High to Low
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link className={sortOption === 'avg-rating' ? 'active' : ''} onClick={() => handleSortChange('avg-rating')}>
-                                                    Avg. Rating
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div className="row product-grid">
-                            {Array.isArray(filteredProducts) && filteredProducts.map(product => (
-                                <div className="col-lg-1-5 col-md-4 col-12 col-sm-6" key={product.id}>
+                            {
+                            products.map((product, index) => (
+                                <div className="col-lg-1-5 col-md-4 col-12 col-sm-6" key={index}>
                                     <div className="product-cart-wrap mb-30">
                                         <div className="product-img-action-wrap">
                                             <div className="product-img product-img-zoom">
-                                                <Link to={`/shop-product-right/${product.id}`}>
+                                                <Link to={`/detail/${product._id}`}>
                                                     <img
                                                         className="default-img"
                                                         src={product.image}
@@ -207,14 +152,14 @@ const Shop = () => {
                                                 <Link
                                                     aria-label="Add To Wishlist"
                                                     className="action-btn"
-                                                    to="/shop-wishlist"
+                                                    to="/wishlist"
                                                 >
                                                     <i className="fa-sharp fa-thin fa-heart"></i>
                                                 </Link>
                                                 <Link
                                                     aria-label="Compare"
                                                     className="action-btn"
-                                                    to="/shop-compare"
+                                                    to="/compare"
                                                 >
                                                     <i className="fa-sharp fa-thin fa-shuffle"></i>
                                                 </Link>
@@ -233,10 +178,10 @@ const Shop = () => {
                                         </div>
                                         <div className="product-content-wrap">
                                             <div className="product-category">
-                                                <Link to="/shop-grid-right">Snack</Link>
+                                                <Link to="/shop">{product.category}</Link>
                                             </div>
                                             <h2>
-                                                <Link to={`/shop-product-right/${product.id}`}>{product.name}</Link>
+                                                <Link to={`/details/${product._id}`}>{product.name}</Link>
                                             </h2>
                                             <div className="product-rate-cover">
                                                 <div className="product-rate d-inline-block">
@@ -244,19 +189,28 @@ const Shop = () => {
                                                 </div>
                                                 <span className="font-small ml-5 text-muted">({product.reviewsCount})</span>
                                             </div>
-                                            <div>
-                                                <span className="font-small text-muted">
-                                                    By <Link to="/vendor">{product.vendor}</Link>
-                                                </span>
-                                            </div>
                                             <div className="product-card-bottom">
                                                 <div className="product-price">
-                                                    <span>${product.price}</span>
-                                                    <span className="old-price">${product.oldPrice}</span>
+                                                    {product.discount > 0 ? (
+                                                        <>
+                                                            <span className='new-price'>
+                                                                {`$${(product.price - (product.price * (product.discount / 100))).toFixed(2)}`}
+                                                                <span>
+                                                                    ({product.discount} % off)
+                                                                </span>
+                                                            </span>
+                                                            <span className="old-price">
+                                                                {`$${product.price}`}
+                                                            </span>
+                                                        </>
+                                                    ) : (
+                                                        <span>{`$${product.price}`}</span>
+                                                    )}
                                                 </div>
                                                 <div className="add-cart">
-                                                    <Link className="add" to={`/shop-product-right/${product.id}`}>
-                                                    <i className="fa-thin fa-cart-shopping mr-5"></i>
+                                                    <Link className="add" to="#" onClick={() => {addToBasket(product._id)}}
+                                                    >
+                                                        <i className="fa-thin fa-cart-shopping mr-5"></i>
                                                         Add
                                                     </Link>
                                                 </div>

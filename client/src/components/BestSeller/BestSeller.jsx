@@ -7,8 +7,17 @@ import "slick-carousel/slick/slick-theme.css";
 import MainContext from '../../context/context';
 
 const BestSeller = () => {
-    const { products } = useContext(MainContext)
+    const {
+        products,
+        addToBasket,
+        toggleWishlist,
+        isProductInWishlist,
+        addToCompare,
+        isProductInCompare
+    } = useContext(MainContext)
+
     const [selectedTab, setSelectedTab] = useState('featured');
+
     const dailyBestSells = products.filter(product => product.dailyBestSells === true);
 
     const renderProducts = (category) => {
@@ -17,25 +26,53 @@ const BestSeller = () => {
                 <div className="product-img-action-wrap">
                     <div className="product-img product-img-zoom">
                         <Link to={`/shop-product-right/${product.id}`}>
-                            <img className="default-img" src={product.image} alt={product.name} />
-                            <img className="hover-img" src={product.hoverImage} alt={product.name} />
+                            <img
+                                className="default-img"
+                                src={product.image}
+                                alt={product.name}
+                                style={{ width: "300px", height: "200px" }}
+                            />
+                            {product.hoverImage && (
+                                <img
+                                    className="hover-img"
+                                    src={product.hoverImage}
+                                    alt={product.name}
+                                    style={{ width: "300px", height: "200px" }}
+                                />
+                            )}
                         </Link>
                     </div>
                     <div className="product-action-1">
-                        <Link to="/id" aria-label="Quick view" className="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                        <Link
+                            to="/id"
+                            aria-label="Quick view"
+                            className="action-btn small hover-up"
+                            data-bs-toggle="modal"
+                            data-bs-target="#quickViewModal"
+                        >
                             <i className="fa-sharp fa-thin fa-eye"></i>
                         </Link>
-                        <Link aria-label="Add To Wishlist" className="action-btn small hover-up" to="/shop-wishlist">
+                        <Link
+                            aria-label="Add To Wishlist"
+                            className={`action-btn ${isProductInWishlist(product._id) ? 'active' : ''}  hover-up small`}
+                            to="#"
+                            onClick={() => toggleWishlist(product._id)}
+                        >
                             <i className="fa-sharp fa-thin fa-heart"></i>
                         </Link>
-                        <Link aria-label="Compare" className="action-btn small hover-up" to="/shop-compare">
+                        <Link
+                            aria-label="Compare"
+                            className={`action-btn ${isProductInCompare(product._id) ? 'active' : ''}  hover-up small`}
+                            to="#"
+                            onClick={() => addToCompare(product._id)}
+                        >
                             <i className="fa-sharp fa-thin fa-shuffle"></i>
                         </Link>
                     </div>
                 </div>
                 <div className="product-content-wrap">
                     <div className="product-category">
-                        <Link to={`/shop-grid-right/${product.category}`}>{product.category}</Link>
+                        <Link to={`/shop/${product.category}`}>{product.category}</Link>
                     </div>
                     <h2><Link to={`/shop-product-right/${product.id}`}>{product.name}</Link></h2>
                     <div className="product-rate d-inline-block">
@@ -64,7 +101,7 @@ const BestSeller = () => {
                         </div>
                         <span className="font-xs text-heading"> Sold: {product.sold}/{product.stock}</span>
                     </div>
-                    <Link className="btn w-100 hover-up" to="/shop-cart">
+                    <Link className="btn w-100 hover-up" to="#" onClick={() => addToBasket(product._id)}>
                         <i className="fa-light fa-cart-shopping mr-5"></i>Add To Cart
                     </Link>
                 </div>
@@ -129,7 +166,7 @@ const BestSeller = () => {
                         <div className="banner-img style-2">
                             <div className="banner-text">
                                 <h2 className="mb-100">Bring nature into your home</h2>
-                                <Link className="btn btn-xs" to="/shop-grid-right">Shop Now <i className="fa-sharp fa-thin fa-arrow-right d-flex align-items-center"></i></Link>
+                                <Link className="btn btn-xs" to="/shop">Shop Now <i className="fa-sharp fa-thin fa-arrow-right d-flex align-items-center"></i></Link>
                             </div>
                         </div>
                     </div>

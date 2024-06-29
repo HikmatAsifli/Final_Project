@@ -29,7 +29,7 @@ const FeaturedCategories = () => {
     }, []);
 
     const goToCategory = (slug) => {
-        window.location.href = `/shop-grid-right/${slug}`;
+        window.location.href = `/shop/${slug}`;
     };
 
     const goToPrevSlide = () => {
@@ -74,12 +74,12 @@ const FeaturedCategories = () => {
                             {categories.map((category, index) => (
                                 <div key={index} className={`slick-slide ${index === activeSlide ? 'slick-active' : ''} card-2 bg-${index + 9} wow animate__animated animate__fadeInUp`} style={{ width: "137px", visibility: "visible", animationDelay: `${index * 0.1}s`, animationName: "fadeInUp" }}>
                                     <figure className="img-hover-scale overflow-hidden">
-                                        <Link to={`/shop-grid-right/${category.slug}`}>
+                                        <Link to={`/shop/${category.slug}`}>
                                             <img src={`assets/imgs/shop/cat-${index + 1}.png`} alt={category.name} />
                                         </Link>
                                     </figure>
                                     <h6>
-                                        <Link to={`/shop-grid-right/${category.slug}`}>{category.name}</Link>
+                                        <Link to={`/shop/${category.slug}`}>{category.name}</Link>
                                     </h6>
                                     <span>{category.items} items</span>
                                 </div>

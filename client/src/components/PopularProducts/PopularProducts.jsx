@@ -4,7 +4,15 @@ import { Link } from 'react-router-dom';
 import MainContext from '../../context/context';
 
 const PopularProducts = () => {
-    const { products } = useContext(MainContext);
+    const {
+        products,
+        addToBasket,
+        toggleWishlist,
+        isProductInWishlist,
+        addToCompare,
+        isProductInCompare
+    } = useContext(MainContext);
+
     const popularProducts = products.filter(product => product.popularProduct === true);
     return (
         <section className="product-tabs section-padding position-relative">
@@ -137,28 +145,34 @@ const PopularProducts = () => {
                                                     className="default-img"
                                                     src={products.image} // Assuming product.image is the image URL
                                                     alt={products.name} // Product name as alt text
+                                                    style={{ width: "300px", height: "200px" }}
                                                 />
                                                 {/* Optional hover image */}
-                                                <img
-                                                    className="hover-img"
-                                                    src={products.hoverImage} // Optional hover image URL
-                                                    alt={products.name} // Product name as alt text
-                                                />
+                                                {products.hoverImage && (
+                                                    <img
+                                                        className="hover-img"
+                                                        src={products.hoverImage}
+                                                        alt={products.name}
+                                                        style={{ width: "300px", height: "200px" }}
+                                                    />
+                                                )}
                                             </Link>
                                         </div>
                                         {/* Product actions */}
                                         <div className="product-action-1">
                                             <Link
                                                 aria-label="Add To Wishlist"
-                                                className="action-btn"
-                                                to="/wishlist"
+                                                className={`action-btn ${isProductInWishlist(products._id) ? 'active' : ''}`}
+                                                to="#"
+                                                onClick={() => toggleWishlist(products._id)}
                                             >
                                                 <i className="fa-sharp fa-thin fa-heart"></i>
                                             </Link>
                                             <Link
                                                 aria-label="Compare"
-                                                className="action-btn"
-                                                to="/compare"
+                                                className={`action-btn ${isProductInCompare(products._id) ? 'active' : ''} `}
+                                                to="#"
+                                                onClick={() => addToCompare(products._id)}
                                             >
                                                 <i className="fa-sharp fa-thin fa-shuffle"></i>
                                             </Link>
@@ -216,7 +230,7 @@ const PopularProducts = () => {
                                                 )}
                                             </div>
                                             <div className="add-cart">
-                                                <Link to="#" className="add" onClick={() => handleAddToCart(products.id)}>
+                                                <Link to="#" className="add" onClick={() => addToBasket(products._id)}>
                                                     <i className="fa-thin fa-cart-shopping mr-5"></i>
                                                     Add
                                                 </Link>
