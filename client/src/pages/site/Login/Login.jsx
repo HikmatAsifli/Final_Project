@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import login1 from "../../../assets/images/page/login-1.png"
+import axios from 'axios';
+import login1 from "../../../assets/images/page/login-1.png";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -11,21 +12,24 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('http://localhost:4404/api/users/login/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await axios.post('http://localhost:4404/api/users/login', { email, password });
+      localStorage.setItem('authToken', response.data.token);
 
-    const data = await response.json();
+      // Fetch user profile to check if admin
+      const userProfile = await axios.get('http://localhost:4404/api/users/profile', {
+        headers: {
+          Authorization: `Bearer ${response.data.token}`,
+        },
+      });
 
-    if (response.ok) {
-      localStorage.setItem('authToken', data.token);
-      navigate('/shop');  // Redirect to the shop page
-    } else {
-      setError(data.message || 'Login failed');
+      if (userProfile.data.user.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/shop');
+      }
+    } catch (error) {
+      setError(error.response?.data?.message || 'Login failed');
     }
   };
 

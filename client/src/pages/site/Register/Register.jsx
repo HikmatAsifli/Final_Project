@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -13,21 +14,18 @@ const Register = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:4404/api/users/register/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, password }),
+      const response = await axios.post('http://localhost:4404/api/users/register/', {
+        name,
+        email,
+        password,
       });
 
-      if (response.ok) {
-        const data = await response.json();
+      if (response.status === 201) {
+        const data = response.data;
         localStorage.setItem('authToken', data.token);
-        navigate('/shop');
+        navigate('/login');
       } else {
-        const errorData = await response.json();
-        setError(errorData.message);
+        setError(response.data.message);
       }
     } catch (err) {
       setError('Something went wrong. Please try again later.');

@@ -6,13 +6,13 @@ const {
   deleteBlog,
   getSingleBlog,
 } = require("../controllers/blogController");
-const { protect } = require("../middlewares/authMiddleware");
+const { protect,admin } = require("../middlewares/authMiddleware");
 const router = express.Router();
 
 router.get("/", getAllBlogs);
 router.get("/:id", getSingleBlog)
-router.post("/", protect, createBlog);
-router.put("/:id", protect, updateBlog);
-router.delete("/:id", protect, deleteBlog);
+router.post("/", createBlog);
+router.put("/:id", updateBlog);
+router.delete("/:id", deleteBlog);
 
 module.exports = router;

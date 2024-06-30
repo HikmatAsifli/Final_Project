@@ -18,6 +18,13 @@ import Cart from "../pages/site/Cart/Cart";
 import Wishlist from "../pages/site/Wishlist/Wishlist";
 import Compare from "../pages/site/Compare/Compare";
 import BlogDetail from "../pages/site/BlogDetail/BlogDetail";
+import AdminRoot from "../pages/admin/AdminRoot";
+import Dashboard from "../pages/admin/Dashboard/Dashboard";
+import Products from "../pages/admin/Products/Products";
+import Orders from "../pages/admin/Orders/Orders";
+import Blogs from "../pages/admin/Blogs/Blogs";
+import AddProduct from "../pages/admin/AddProduct/AddProduct";
+import AddBlog from "../pages/admin/AddBlog/AddBlog";
 
 const ROUTES = [
     {
@@ -99,6 +106,36 @@ const ROUTES = [
             {
                 path: "*",
                 element: <Error />
+            }
+        ]
+    },
+    {
+        path: "/admin",
+        element: <AdminRoot />,
+        children: [
+            {
+                path: "dashboard",
+                element: <Dashboard />
+            },
+            {
+                path: "products",
+                element: <Products />
+            },
+            {
+                path: "orders",
+                element: <Orders />
+            },
+            {
+                path: "blogs",
+                element: <Blogs />
+            },
+            {
+                path: "add-product",
+                element: <AddProduct />
+            },
+            {
+                path: "add-blog",
+                element: <AddBlog />
             }
         ]
     }
