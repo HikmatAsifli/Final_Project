@@ -3,7 +3,7 @@ import MainContext from '../../../context/context';
 import { Link } from 'react-router-dom';
 
 const Cart = () => {
-    const { basket, addToBasket, removeFromBasket } = useContext(MainContext);
+    const { basket, addToBasket, removeFromBasket, totalAmount } = useContext(MainContext);
 
     const handleQuantityChange = (id, value) => {
         if (value === 'increase') {
@@ -17,7 +17,7 @@ const Cart = () => {
         basket.forEach(item => removeFromBasket(item._id));
     };
 
-    const totalAmount = basket.reduce((acc, item) => acc + item.totalPrice, 0);
+    
 
     return (
         <main className="main">
@@ -89,7 +89,7 @@ const Cart = () => {
                                                 <label className="form-check-label" htmlFor={`checkbox-${item._id}`} />
                                             </td>
                                             <td className="image product-thumbnail pt-40">
-                                                <img src="assets/imgs/shop/product-1-1.jpg" alt="#" />
+                                                <img src={item.image} alt="#" />
                                             </td>
                                             <td className="product-des product-name">
                                                 <h6 className="mb-5">

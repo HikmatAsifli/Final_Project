@@ -15,6 +15,8 @@ import axios from "axios";
 const App = () => {
   const [products, setProducts] = useState([])
 
+  const [blog, setBlog] = useState([])
+
   const router = createBrowserRouter(ROUTES);
 
   const [wishlist, setWishlist] = useState([]);
@@ -31,11 +33,20 @@ const App = () => {
       : []
   );
 
+  const [inpVal, setInpVal] = useState("");
+
 
   useEffect(() => {
     axios.get("http://localhost:4404/api/products/")
       .then((res) => {
         setProducts([...res.data])
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.get("http://localhost:4404/api/blogs/")
+      .then((res) => {
+        setBlog([...res.data])
       });
   }, []);
 
@@ -74,6 +85,8 @@ const App = () => {
       setBasket([...basket.filter((x) => x._id != id)]);
     }
   }
+
+  const totalAmount = basket.reduce((acc, item) => acc + item.totalPrice, 0);
 
 
 
@@ -137,10 +150,13 @@ const App = () => {
   const contextData = {
     products,
     setProducts,
+    blog,
+    setBlog,
     basket,
     setBasket,
     addToBasket,
     removeFromBasket,
+    totalAmount,
     wishlist,
     setWishlist,
     toggleWishlist,
@@ -151,6 +167,8 @@ const App = () => {
     addToCompare,
     removeFromCompare,
     isProductInCompare,
+    inpVal,
+    setInpVal
   };
   return (
     <>

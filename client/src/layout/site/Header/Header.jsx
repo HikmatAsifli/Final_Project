@@ -1,18 +1,32 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from "react-router-dom";
 import logo from "../../../assets/images/theme/logo.svg"
-import compare from "../../../assets/images/theme/icons/icon-compare.svg"
-import heart from "../../../assets/images/theme/icons/icon-heart.svg"
-import cart from "../../../assets/images/theme/icons/icon-cart.svg"
+import compareSVG from "../../../assets/images/theme/icons/icon-compare.svg"
+import heartSVG from "../../../assets/images/theme/icons/icon-heart.svg"
+import cartSVG from "../../../assets/images/theme/icons/icon-cart.svg"
 import user from "../../../assets/images/theme/icons/icon-user.svg"
 import headphone from "../../../assets/images/theme/icons/icon-headphone.svg"
 import hot from "../../../assets/images/theme/icons/icon-hot.svg"
 import bannerMenu from "../../../assets/images/banner/banner-menu.png"
 import thumbnail3 from "../../../assets/images/shop/thumbnail-3.jpg"
+import MainContext from '../../../context/context';
 
 
 
 const Header = () => {
+    const {
+        products,
+        wishlist,
+        basket,
+        removeFromBasket,
+        compare,
+        totalAmount
+
+    } = useContext(MainContext)
+
+    const [inpVal,
+        setInpVal] = useState([])
+
     return (
         <>
             <header className="header-area header-style-1 header-height-2">
@@ -91,15 +105,22 @@ const Header = () => {
                                             <span className="dropdown-wrapper" aria-hidden="true">
                                             </span>
                                         </span>
-                                        <input type="text" placeholder="Search for items..." />
+                                        <input
+                                            type="text"
+                                            placeholder="Search for items..."
+                                            value={inpVal}
+                                            onChange={(e) => {
+                                                setInpVal(e.target.value);
+                                            }}
+                                        />
                                     </form>
                                 </div>
                                 <div className="header-action-right">
                                     <div className="header-action-2">
                                         <div className="header-action-icon-2">
                                             <Link to="/compare">
-                                                <img className="svgInject" alt="Nest" src={compare} />
-                                                <span className="pro-count blue">3</span>
+                                                <img className="svgInject" alt="Nest" src={compareSVG} />
+                                                <span className="pro-count blue">{compare.length}</span>
                                             </Link>
                                             <Link to="/compare">
                                                 <span className="lable ml-0">Compare</span>
@@ -107,8 +128,8 @@ const Header = () => {
                                         </div>
                                         <div className="header-action-icon-2">
                                             <Link to="/wishlist">
-                                                <img className="svgInject" alt="Nest" src={heart} />
-                                                <span className="pro-count blue">6</span>
+                                                <img className="svgInject" alt="Nest" src={heartSVG} />
+                                                <span className="pro-count blue">{wishlist.length}</span>
                                             </Link>
                                             <Link to="/wishlist">
                                                 <span className="lable">Wishlist</span>
@@ -116,55 +137,40 @@ const Header = () => {
                                         </div>
                                         <div className="header-action-icon-2">
                                             <Link className="mini-cart-icon" to="/cart">
-                                                <img alt="Nest" src={cart} />
-                                                <span className="pro-count blue">2</span>
+                                                <img alt="Nest" src={cartSVG} />
+                                                <span className="pro-count blue">{basket.length}</span>
                                             </Link>
                                             <Link to="/cart">
                                                 <span className="lable">Cart</span>
                                             </Link>
                                             <div className="cart-dropdown-wrap cart-dropdown-hm2">
                                                 <ul>
-                                                    <li>
-                                                        <div className="shopping-cart-img">
-                                                            <Link to="/shop">
-                                                                <img alt="Nest" src={thumbnail3} />
-                                                            </Link>
-                                                        </div>
-                                                        <div className="shopping-cart-title">
-                                                            <h4>
-                                                                <Link to="/shop">Daisy Casual Bag</Link>
-                                                            </h4>
-                                                            <h4><span>1 × </span>$800.00</h4>
-                                                        </div>
-                                                    <div className="shopping-cart-delete">
-                                                            <Link to="#">
-                                                                <i className="fi-rs-cross-small"></i>
-                                                            </Link>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="shopping-cart-img">
-                                                            <Link to="/shop">
-                                                                <img alt="Nest" src="assets/imgs/shop/thumbnail-2.jpg" />
-                                                            </Link>
-                                                        </div>
-                                                        <div className="shopping-cart-title">
-                                                            <h4>
-                                                                <Link to="/shop">Corduroy Shirts</Link>
-                                                            </h4>
-                                                            <h4><span>1 × </span>$3200.00</h4>
-                                                        </div>
-                                                        <div className="shopping-cart-delete">
-                                                            <Link to="#">
-                                                                <i className="fi-rs-cross-small"></i>
-                                                            </Link>
-                                                        </div>
-                                                    </li>
+                                                    {basket.map(item => (
+                                                        <li key={item.id}>
+                                                            <div className="shopping-cart-img">
+                                                                <Link to="/shop">
+                                                                    <img alt={item.name} src={item.image} />
+                                                                </Link>
+                                                            </div>
+                                                            <div className="shopping-cart-title">
+                                                                <h4>
+                                                                    <Link to="/shop">{item.name}</Link>
+                                                                </h4>
+                                                                <h4><span>{item.count} × </span>${item.price.toFixed(2)}</h4>
+                                                            </div>
+                                                            <div className="shopping-cart-delete">
+                                                                <Link to="#" onClick={() => removeFromBasket(item._id)}>
+                                                                    <i className="fa-sharp fa-light fa-xmark"></i>
+                                                                </Link>
+                                                            </div>
+                                                        </li>
+                                                    ))}
                                                 </ul>
                                                 <div className="shopping-cart-footer">
                                                     <div className="shopping-cart-total">
-                                                        <h4>Total <span>$4000.00</span></h4>
+                                                        <h4>Total <span>${totalAmount}</span></h4>
                                                     </div>
+
                                                     <div className="shopping-cart-button">
                                                         <Link className="outline" to="/shop-cart">View cart</Link>
                                                         <Link to="/shop-checkout">Checkout</Link>
@@ -471,49 +477,46 @@ const Header = () => {
                                 <div className="header-action-2">
                                     <div className="header-action-icon-2">
                                         <Link to="/wishlist">
-                                            <img alt="Nest" src={heart} />
-                                            <span className="pro-count white">4</span>
+                                            <img alt="Nest" src={heartSVG} />
+                                            <span className="pro-count white">{wishlist.length}</span>
                                         </Link>
                                     </div>
                                     <div className="header-action-icon-2">
                                         <Link className="mini-cart-icon" to="#">
-                                            <img alt="Nest" src={cart} />
-                                            <span className="pro-count white">2</span>
+                                            <img alt="Nest" src={cartSVG} />
+                                            <span className="pro-count white">{basket.length}</span>
                                         </Link>
                                         <div className="cart-dropdown-wrap cart-dropdown-hm2">
                                             <ul>
-                                                <li>
-                                                    <div className="shopping-cart-img">
-                                                        <Link to="/shop"><img alt="Nest" src="assets/imgs/shop/thumbnail-3.jpg" /></Link>
-                                                    </div>
-                                                    <div className="shopping-cart-title">
-                                                        <h4><Link to="/shop">Plain Striola Shirts</Link></h4>
-                                                        <h3><span>1 × </span>$800.00</h3>
-                                                    </div>
-                                                    <div className="shopping-cart-delete">
-                                                        <Link to="#"><i className="fi-rs-cross-small"></i></Link>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="shopping-cart-img">
-                                                        <Link to="/shop"><img alt="Nest" src="assets/imgs/shop/thumbnail-4.jpg" /></Link>
-                                                    </div>
-                                                    <div className="shopping-cart-title">
-                                                        <h4><Link to="/shop">Macbook Pro 2024</Link></h4>
-                                                        <h3><span>1 × </span>$3500.00</h3>
-                                                    </div>
-                                                    <div className="shopping-cart-delete">
-                                                        <Link to="#"><i className="fi-rs-cross-small"></i></Link>
-                                                    </div>
-                                                </li>
+                                                {basket.map(item => (
+                                                    <li key={item.id}>
+                                                        <div className="shopping-cart-img">
+                                                            <Link to="/shop">
+                                                                <img alt={item.name} src={item.image} />
+                                                            </Link>
+                                                        </div>
+                                                        <div className="shopping-cart-title">
+                                                            <h4>
+                                                                <Link to="/shop">{item.name}</Link>
+                                                            </h4>
+                                                            <h4><span>{item.count} × </span>${item.price.toFixed(2)}</h4>
+                                                        </div>
+                                                        <div className="shopping-cart-delete">
+                                                            <Link to="#" onClick={() => removeFromBasket(item._id)}>
+                                                                <i className="fa-sharp fa-light fa-xmark"></i>
+                                                            </Link>
+                                                        </div>
+                                                    </li>
+                                                ))}
                                             </ul>
                                             <div className="shopping-cart-footer">
                                                 <div className="shopping-cart-total">
-                                                    <h4>Total <span>$383.00</span></h4>
+                                                    <h4>Total <span>${totalAmount}</span></h4>
                                                 </div>
+
                                                 <div className="shopping-cart-button">
-                                                    <Link to="/cart">View cart</Link>
-                                                    <Link to="/checkout">Checkout</Link>
+                                                    <Link className="outline" to="/shop">View cart</Link>
+                                                    <Link to="/shop">Checkout</Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -566,21 +569,21 @@ const Header = () => {
                                             <li><Link to="/shop">Shop Grid – Left Sidebar</Link></li>
                                             <li><Link to="/shop">Shop List – Right Sidebar</Link></li>
                                             <li><Link to="/shop">Shop List – Left Sidebar</Link></li>
-                                            <li><Link to="/shop-fullwidth">Shop - Wide</Link></li>
+                                            <li><Link to="/shop">Shop - Wide</Link></li>
                                             <li className="menu-item-has-children"><span className="menu-expand"><i className="fi-rs-angle-small-down"></i></span>
                                                 <Link to="#">Single Product</Link>
                                                 <ul className="dropdown" style={{ display: "none" }}>
                                                     <li><Link to="/shop">Product – Right Sidebar</Link></li>
-                                                    <li><Link to="/shop-product-left">Product – Left Sidebar</Link></li>
-                                                    <li><Link to="/shop-product-full">Product – No Sidebar</Link></li>
-                                                    <li><Link to="/shop-product-vendor">Product – Vendor Info</Link></li>
+                                                    <li><Link to="/shop">Product – Left Sidebar</Link></li>
+                                                    <li><Link to="/shop">Product – No Sidebar</Link></li>
+                                                    <li><Link to="/shop">Product – Vendor Info</Link></li>
                                                 </ul>
                                             </li>
-                                            <li><Link to="/shop-filter">Shop – Filter</Link></li>
-                                            <li><Link to="/shop-wishlist">Shop – Wishlist</Link></li>
-                                            <li><Link to="/shop-cart">Shop – Cart</Link></li>
-                                            <li><Link to="/shop-checkout">Shop – Checkout</Link></li>
-                                            <li><Link to="/shop-compare">Shop – Compare</Link></li>
+                                            <li><Link to="/shop">Shop – Filter</Link></li>
+                                            <li><Link to="/shop">Shop – Wishlist</Link></li>
+                                            <li><Link to="/shop">Shop – Cart</Link></li>
+                                            <li><Link to="/shop">Shop – Checkout</Link></li>
+                                            <li><Link to="/shop">Shop – Compare</Link></li>
                                             <li className="menu-item-has-children"><span className="menu-expand"><i className="fi-rs-angle-small-down"></i></span>
                                                 <Link to="#">Shop Invoice</Link>
                                                 <ul className="dropdown" style={{ display: "none" }}>
@@ -592,17 +595,6 @@ const Header = () => {
                                                     <li><Link to="/shop-invoice-6">Shop Invoice 6</Link></li>
                                                 </ul>
                                             </li>
-                                        </ul>
-                                    </li>
-                                    <li className="menu-item-has-children"><span className="menu-expand"><i className="fi-rs-angle-small-down"></i></span>
-                                        <Link to="#">Vendors</Link>
-                                        <ul className="dropdown" style={{ display: "none" }}>
-                                            <li><Link to="/vendors-grid">Vendors Grid</Link></li>
-                                            <li><Link to="/vendors-list">Vendors List</Link></li>
-                                            <li><Link to="/vendor-details-1">Vendor Details 01</Link></li>
-                                            <li><Link to="/vendor-details-2">Vendor Details 02</Link></li>
-                                            <li><Link to="/vendor-dashboard">Vendor Dashboard</Link></li>
-                                            <li><Link to="/vendor-guide">Vendor Guide</Link></li>
                                         </ul>
                                     </li>
                                     <li className="menu-item-has-children"><span className="menu-expand"><i className="fi-rs-angle-small-down"></i></span>

@@ -17,6 +17,7 @@ import Error from "../pages/site/Error/Error";
 import Cart from "../pages/site/Cart/Cart";
 import Wishlist from "../pages/site/Wishlist/Wishlist";
 import Compare from "../pages/site/Compare/Compare";
+import BlogDetail from "../pages/site/BlogDetail/BlogDetail";
 
 const ROUTES = [
     {
@@ -46,6 +47,10 @@ const ROUTES = [
             {
                 path: "blog",
                 element: <Blog />
+            },
+            {
+                path: "blog/:id",
+                element: <BlogDetail />
             },
             {
                 path: "account",
