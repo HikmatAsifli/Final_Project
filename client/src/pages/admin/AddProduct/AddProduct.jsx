@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet-async";
 import MainContext from "../../../context/context";
 import axios from "axios";
 
-
 const AddProduct = () => {
     const { products, setProducts } = useContext(MainContext);
 
@@ -23,39 +22,43 @@ const AddProduct = () => {
                     image: "",
                     hoverImage: "",
                     rating: "",
-                    popularProduct: false,
-                    dailyBestSells: false,
-                    dealsOfTheDay: false,
+                    popularProduct: "false",
+                    dailyBestSells: "false",
+                    dealsOfTheDay: "false",
                     dealsOfTheDayStartTime: null,
                     dealsOfTheDayEndTime: null,
-                    topSelling: false,
-                    trendingProduct: false,
-                    recentlyAdded: false,
-                    topRated: false
+                    topSelling: "false",
+                    trendingProduct: "false",
+                    recentlyAdded: "false",
+                    topRated: "false"
                 }}
                 onSubmit={(values, { resetForm }) => {
-                    console.log(values)
+                    const payload = {
+                        name: values.name,
+                        category: values.category,
+                        description: values.description,
+                        price: parseFloat(values.price),
+                        discount: parseFloat(values.discount),
+                        image: values.image,
+                        hoverImage: values.hoverImage,
+                        rating: parseFloat(values.rating),
+                        popularProduct: values.popularProduct === "true",
+                        dailyBestSells: values.dailyBestSells === "true",
+                        dealsOfTheDay: values.dealsOfTheDay === "true",
+                        dealsOfTheDayStartTime: values.dealsOfTheDayStartTime,
+                        dealsOfTheDayEndTime: values.dealsOfTheDayEndTime,
+                        topSelling: values.topSelling === "true",
+                        trendingProduct: values.trendingProduct === "true",
+                        recentlyAdded: values.recentlyAdded === "true",
+                        topRated: values.topRated === "true",
+                    };
+
+                    console.log("Submitting payload:", payload); // Debugging
+
                     axios
-                        .post("http://localhost:4404/api/products/", {
-                            name: values.name,
-                            category: values.category,
-                            price: values.price,
-                            discount: values.discount,
-                            image: values.image,
-                            hoverImage: values.hoverImage,
-                            rating: values.rating,
-                            popularProduct: values.popularProduct,
-                            dailyBestSells: values.dailyBestSells,
-                            dealsOfTheDay: values.dealsOfTheDay,
-                            dealsOfTheDayStartTime: values.dealsOfTheDayStartTime,
-                            dealsOfTheDayEndTime: values.dealsOfTheDayEndTime,
-                            topSelling: values.topSelling,
-                            trendingProduct: values.trendingProduct,
-                            recentlyAdded: values.recentlyAdded,
-                            topRated: values.topRated,
-                        })
+                        .post("http://localhost:4404/api/products/", payload)
                         .then((res) => {
-                            setProducts([...data, res.data]);
+                            setProducts([...products, res.data]);
                             resetForm();
                         })
                         .catch((error) => {
@@ -199,20 +202,11 @@ const AddProduct = () => {
                         <label htmlFor="popularProduct" className="form-label">
                             Popular Product
                         </label>
-
                         <select
                             name="popularProduct"
                             id="popularProduct"
                             className="form-control"
-                            onChange={(e) => {
-                                const value = e.target.value === "true"; // Convert string to boolean
-                                handleChange({
-                                    target: {
-                                        name: "popularProduct",
-                                        value: value,
-                                    },
-                                });
-                            }}
+                            onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.popularProduct}
                         >
@@ -224,20 +218,11 @@ const AddProduct = () => {
                         <label htmlFor="dailyBestSells" className="form-label">
                             Daily Best Sells
                         </label>
-
                         <select
                             name="dailyBestSells"
                             id="dailyBestSells"
                             className="form-control"
-                            onChange={(e) => {
-                                const value = e.target.value === "true"; // Convert string to boolean
-                                handleChange({
-                                    target: {
-                                        name: "dailyBestSells",
-                                        value: value,
-                                    },
-                                });
-                            }}
+                            onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.dailyBestSells}
                         >
@@ -249,20 +234,11 @@ const AddProduct = () => {
                         <label htmlFor="dealsOfTheDay" className="form-label">
                             Deals Of Day
                         </label>
-
                         <select
                             name="dealsOfTheDay"
                             id="dealsOfTheDay"
                             className="form-control"
-                            onChange={(e) => {
-                                const value = e.target.value === "true"; // Convert string to boolean
-                                handleChange({
-                                    target: {
-                                        name: "dealsOfTheDay",
-                                        value: value,
-                                    },
-                                });
-                            }}
+                            onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.dealsOfTheDay}
                         >
@@ -274,54 +250,39 @@ const AddProduct = () => {
                         <label htmlFor="dealsOfTheDayStartTime" className="form-label">
                             Deals Of Day Start Time
                         </label>
-
                         <input
                             type="date"
                             name="dealsOfTheDayStartTime"
                             id="dealsOfTheDayStartTime"
-                            placeholder="Enter Deals Of Day Start Time"
                             className="form-control"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.dealsOfTheDayStartTime}
                         />
-
                         {errors.dealsOfTheDayStartTime && touched.dealsOfTheDayStartTime && <div className="text-danger">{errors.dealsOfTheDayStartTime}</div>}
 
                         <label htmlFor="dealsOfTheDayEndTime" className="form-label">
                             Deals Of Day End Time
                         </label>
-
                         <input
                             type="date"
                             name="dealsOfTheDayEndTime"
                             id="dealsOfTheDayEndTime"
-                            placeholder="Enter Deals Of Day End Time"
                             className="form-control"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.dealsOfTheDayEndTime}
                         />
-
                         {errors.dealsOfTheDayEndTime && touched.dealsOfTheDayEndTime && <div className="text-danger">{errors.dealsOfTheDayEndTime}</div>}
 
                         <label htmlFor="topSelling" className="form-label">
                             Top Selling
                         </label>
-
                         <select
                             name="topSelling"
                             id="topSelling"
                             className="form-control"
-                            onChange={(e) => {
-                                const value = e.target.value === "true"; // Convert string to boolean
-                                handleChange({
-                                    target: {
-                                        name: "topSelling",
-                                        value: value,
-                                    },
-                                });
-                            }}
+                            onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.topSelling}
                         >
@@ -333,20 +294,11 @@ const AddProduct = () => {
                         <label htmlFor="trendingProduct" className="form-label">
                             Trending Product
                         </label>
-
                         <select
                             name="trendingProduct"
                             id="trendingProduct"
                             className="form-control"
-                            onChange={(e) => {
-                                const value = e.target.value === "true"; // Convert string to boolean
-                                handleChange({
-                                    target: {
-                                        name: "trendingProduct",
-                                        value: value,
-                                    },
-                                });
-                            }}
+                            onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.trendingProduct}
                         >
@@ -358,20 +310,11 @@ const AddProduct = () => {
                         <label htmlFor="recentlyAdded" className="form-label">
                             Recently Added
                         </label>
-
                         <select
                             name="recentlyAdded"
                             id="recentlyAdded"
                             className="form-control"
-                            onChange={(e) => {
-                                const value = e.target.value === "true"; // Convert string to boolean
-                                handleChange({
-                                    target: {
-                                        name: "recentlyAdded",
-                                        value: value,
-                                    },
-                                });
-                            }}
+                            onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.recentlyAdded}
                         >
@@ -383,20 +326,11 @@ const AddProduct = () => {
                         <label htmlFor="topRated" className="form-label">
                             Top Rated
                         </label>
-
                         <select
                             name="topRated"
                             id="topRated"
                             className="form-control"
-                            onChange={(e) => {
-                                const value = e.target.value === "true"; // Convert string to boolean
-                                handleChange({
-                                    target: {
-                                        name: "topRated",
-                                        value: value,
-                                    },
-                                });
-                            }}
+                            onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.topRated}
                         >
@@ -415,4 +349,4 @@ const AddProduct = () => {
     );
 };
 
-export default AddProduct
+export default AddProduct;

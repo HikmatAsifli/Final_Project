@@ -25,7 +25,7 @@ const TopSelling = () => {
                         <div className="product-rate d-inline-block">
                             <div className="product-rating" style={{ width: `${product.rating * 10}%` }} />
                         </div>
-                        <span className="font-small ml-5 text-muted"> ({product.rating})</span>
+                        <span className="font-small ml-5 text-muted"> {product.rating}</span>
                     </div>
                     <div className="product-price">
                         {product.discount > 0 ? (

@@ -96,10 +96,6 @@ const BestSeller = () => {
                         )}
                     </div>
                     <div className="sold mt-15 mb-15">
-                        <div className="progress mb-5">
-                            <div className="progress-bar" role="progressbar" style={{ width: `${product.soldPercentage}%` }} aria-valuemin={0} aria-valuemax={100} />
-                        </div>
-                        <span className="font-xs text-heading"> Sold: {product.sold}/{product.stock}</span>
                     </div>
                     <Link className="btn w-100 hover-up" to="#" onClick={() => addToBasket(product._id)}>
                         <i className="fa-light fa-cart-shopping mr-5"></i>Add To Cart

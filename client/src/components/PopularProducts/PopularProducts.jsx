@@ -207,7 +207,7 @@ const PopularProducts = () => {
                                                 {/* Assuming product.rating is a number */}
                                                 <div className="product-rating" style={{ width: `${products.rating * 20}%` }} />
                                             </div>
-                                            <span className="font-small ml-5 text-muted"> ({products.rating})</span>
+                                            <span className="font-small ml-5 text-muted"> {products.rating}</span>
                                         </div>
                                         <div className="product-card-bottom">
                                             <div className="product-price">

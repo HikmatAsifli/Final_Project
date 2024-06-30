@@ -139,7 +139,6 @@ const Shop = () => {
                                                             <div className="product-rate d-inline-block">
                                                                 <div className="product-rating" style={{ width: `${product.rating * 20}%` }} />
                                                             </div>
-                                                            <span className="font-small ml-5 text-muted">({product.reviewsCount})</span>
                                                         </div>
                                                         <div className="product-card-bottom">
                                                             <div className="product-price">

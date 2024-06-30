@@ -114,7 +114,7 @@ const ROUTES = [
         element: <AdminRoot />,
         children: [
             {
-                path: "dashboard",
+                path: "",
                 element: <Dashboard />
             },
             {
