@@ -2,12 +2,10 @@ import React, { useContext, useEffect } from 'react';
 import MainContext from '../../../context/context';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom'; // Assuming you use React Router for navigation
 
 const Products = () => {
     const { products, setProducts } = useContext(MainContext);
 
-    // Function to delete a product
     function deleteItem(id) {
         axios.delete(`http://localhost:4404/api/products/${id}`)
             .then(() => {
@@ -15,10 +13,8 @@ const Products = () => {
             })
             .catch(error => {
                 console.error('Error deleting product:', error);
-                // Handle error state or notification
             });
     }
-
 
     function editItem(id) {
         axios.put(`http://localhost:4404/api/products/${id}`)
