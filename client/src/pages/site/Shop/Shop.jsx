@@ -81,7 +81,7 @@ const Shop = () => {
                                                 <div className="product-cart-wrap mb-30">
                                                     <div className="product-img-action-wrap">
                                                         <div className="product-img product-img-zoom">
-                                                            <Link to={`/detail/${product._id}`}>
+                                                            <Link to={`/products/${product._id}`}>
                                                                 <img
                                                                     className="default-img"
                                                                     src={product.image}
@@ -133,7 +133,7 @@ const Shop = () => {
                                                             <Link to="/shop">{product.category}</Link>
                                                         </div>
                                                         <h2>
-                                                            <Link to={`/details/${product._id}`}>{product.name}</Link>
+                                                            <Link to={`/products/${product._id}`}>{product.name}</Link>
                                                         </h2>
                                                         <div className="product-rate-cover">
                                                             <div className="product-rate d-inline-block">

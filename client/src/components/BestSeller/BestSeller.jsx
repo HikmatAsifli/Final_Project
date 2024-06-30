@@ -25,7 +25,7 @@ const BestSeller = () => {
             <div className="product-cart-wrap" key={product.id}>
                 <div className="product-img-action-wrap">
                     <div className="product-img product-img-zoom">
-                        <Link to={`/shop-product-right/${product.id}`}>
+                        <Link to={`/products/${product._id}`}>
                             <img
                                 className="default-img"
                                 src={product.image}
@@ -72,9 +72,9 @@ const BestSeller = () => {
                 </div>
                 <div className="product-content-wrap">
                     <div className="product-category">
-                        <Link to={`/shop/${product.category}`}>{product.category}</Link>
+                        <Link to="/shop">{product.category}</Link>
                     </div>
-                    <h2><Link to={`/shop-product-right/${product.id}`}>{product.name}</Link></h2>
+                    <h2><Link to={`/products/${product._id}`}>{product.name}</Link></h2>
                     <div className="product-rate d-inline-block">
                         <div className="product-rating" style={{ width: `${product.rating * 20}%` }} />
                     </div>

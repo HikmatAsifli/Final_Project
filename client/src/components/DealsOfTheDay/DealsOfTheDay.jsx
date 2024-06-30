@@ -51,7 +51,7 @@ const DealsOfTheDay = () => {
                             <div className="product-cart-wrap style-2 wow animate__ animate__fadeInUp animated" data-wow-delay={0} style={{ visibility: 'visible', animationName: 'fadeInUp' }}>
                                 <div className="product-img-action-wrap">
                                     <div className="product-img">
-                                        <Link to={`/shop-product-right/${product.id}`}>
+                                        <Link to={`/products/${product._id}`}>
                                             <img
                                                 src={product.image}
                                                 alt={product.name}
@@ -88,7 +88,7 @@ const DealsOfTheDay = () => {
                                         </div>
                                     </div>
                                     <div className="deals-content">
-                                        <h2><Link to={`/shop-product-right/${product.id}`}>{product.name}</Link></h2>
+                                        <h2><Link to={`/products/${product._id}`}>{product.name}</Link></h2>
                                         <div className="product-card-bottom">
                                             <div className="product-price">
                                                 {product.discount > 0 ? (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import MainContext from '../../context/context';
+import { Link } from 'react-router-dom';
 
 const TopSelling = () => {
     const { products } = useContext(MainContext)
@@ -12,13 +13,13 @@ const TopSelling = () => {
         return products.map((product, index) => (
             <article key={index} className="row align-items-center hover-up">
                 <figure className="col-md-4 mb-0">
-                    <a href={`/shop-product-right/${product.id}`}>
+                    <Link to={`/products/${product._id}`}>
                         <img src={product.image} alt={product.name} />
-                    </a>
+                    </Link>
                 </figure>
                 <div className="col-md-8 mb-0">
                     <h6>
-                        <a href={`/shop-product-right/${product.id}`}>{product.name}</a>
+                        <Link to={`/products/${product._id}`}>{product.name}</Link>
                     </h6>
                     <div className="product-rate-cover">
                         <div className="product-rate d-inline-block">

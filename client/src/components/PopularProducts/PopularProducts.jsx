@@ -134,13 +134,11 @@ const PopularProducts = () => {
                     ></div>
                     <div className="row product-grid-4">
                         {popularProducts.map(products => (
-
-
                             <div className="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                 <div className="product-cart-wrap mb-30 wow animate__ animate__fadeIn animated">
                                     <div className="product-img-action-wrap">
                                         <div className="product-img product-img-zoom">
-                                            <Link to={`/shop-product/${products.id}`}>
+                                            <Link to={`/products/${products._id}`}>
                                                 <img
                                                     className="default-img"
                                                     src={products.image} // Assuming product.image is the image URL
@@ -195,12 +193,12 @@ const PopularProducts = () => {
                                     {/* Product content */}
                                     <div className="product-content-wrap">
                                         <div className="product-category">
-                                            <Link to={`/shop-category/${products.category}`}>
+                                            <Link to={`/products/${products._id}`}>
                                                 {products.category}
                                             </Link>
                                         </div>
                                         <h2>
-                                            <Link to={`/shop-product/${products.id}`}>
+                                            <Link to={`/products/${products._id}`}>
                                                 {products.name}
                                             </Link>
                                         </h2>

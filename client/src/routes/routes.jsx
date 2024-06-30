@@ -41,7 +41,7 @@ const ROUTES = [
                 element: <Contact />
             },
             {
-                path: "detail/:id",
+                path: "products/:id",
                 element: <Detail />
             },
             {
