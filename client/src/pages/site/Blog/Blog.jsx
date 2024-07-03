@@ -52,7 +52,6 @@ const Blog = () => {
                           className="border-radius-15"
                           src={item.image}
                           alt=""
-                          style={{ height: "200px"}}
                         />
                       </Link>
                     </div>

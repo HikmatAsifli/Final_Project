@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { getMyOrders } from '../../../services/orderService';
 
 const Account = () => {
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [user, setUser] = useState(null);
+  const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +38,17 @@ const Account = () => {
       }
     };
 
+    const fetchUserOrders = async () => {
+      try {
+        const userOrders = await getMyOrders();
+        setOrders(userOrders);
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
+
     fetchUserProfile();
+    fetchUserOrders();
   }, [navigate]);
 
   if (!user) {
@@ -64,13 +77,13 @@ const Account = () => {
                     <ul className="nav flex-column" role="tablist">
                       <li className="nav-item">
                         <Link
-                          className="nav-link active"
-                          id="dashboard-tab"
-                          data-bs-toggle="tab"
+                          className={`nav-link ${activeTab === 'dashboard' ? 'active' : ''}`}
+                          onClick={() => handleTabChange('dashboard')}
                           to="#dashboard"
                           role="tab"
                           aria-controls="dashboard"
-                          aria-selected="false"
+                          aria-selected={activeTab === 'dashboard'}
+
                         >
                           <i className="fi-rs-settings-sliders mr-10" />
                           Dashboard
@@ -78,13 +91,12 @@ const Account = () => {
                       </li>
                       <li className="nav-item">
                         <Link
-                          className="nav-link"
-                          id="orders-tab"
-                          data-bs-toggle="tab"
+                          className={`nav-link ${activeTab === 'orders' ? 'active' : ''}`}
+                          onClick={() => handleTabChange('orders')}
                           to="#orders"
                           role="tab"
                           aria-controls="orders"
-                          aria-selected="false"
+                          aria-selected={activeTab === 'orders'}
                         >
                           <i className="fi-rs-shopping-bag mr-10" />
                           Orders
@@ -92,13 +104,12 @@ const Account = () => {
                       </li>
                       <li className="nav-item">
                         <Link
-                          className="nav-link"
-                          id="track-orders-tab"
-                          data-bs-toggle="tab"
+                          className={`nav-link ${activeTab === 'track-orders' ? 'active' : ''}`}
+                          onClick={() => handleTabChange('track-orders')}
                           to="#track-orders"
                           role="tab"
                           aria-controls="track-orders"
-                          aria-selected="false"
+                          aria-selected={activeTab === 'track-orders'}
                         >
                           <i className="fi-rs-shopping-cart-check mr-10" />
                           Track Your Order
@@ -106,13 +117,12 @@ const Account = () => {
                       </li>
                       <li className="nav-item">
                         <Link
-                          className="nav-link"
-                          id="address-tab"
-                          data-bs-toggle="tab"
+                          className={`nav-link ${activeTab === 'address' ? 'active' : ''}`}
+                          onClick={() => handleTabChange('address')}
                           to="#address"
                           role="tab"
                           aria-controls="address"
-                          aria-selected="true"
+                          aria-selected={activeTab === 'address'}
                         >
                           <i className="fi-rs-marker mr-10" />
                           My Address
@@ -120,13 +130,12 @@ const Account = () => {
                       </li>
                       <li className="nav-item">
                         <Link
-                          className="nav-link"
-                          id="account-detail-tab"
-                          data-bs-toggle="tab"
+                          className={`nav-link ${activeTab === 'account-detail' ? 'active' : ''}`}
+                          onClick={() => handleTabChange('account-detail')}
                           to="#account-detail"
                           role="tab"
                           aria-controls="account-detail"
-                          aria-selected="true"
+                          aria-selected={activeTab === 'account-detail'}
                         >
                           <i className="fi-rs-user mr-10" />
                           Account details
@@ -144,7 +153,7 @@ const Account = () => {
                 <div className="col-md-9">
                   <div className="tab-content account dashboard-content pl-50">
                     <div
-                      className="tab-pane fade active show"
+                      className={`tab-pane fade ${activeTab === 'dashboard' ? 'active show' : ''}`}
                       id="dashboard"
                       role="tabpanel"
                       aria-labelledby="dashboard-tab"
@@ -161,9 +170,8 @@ const Account = () => {
                         </div>
                       </div>
                     </div>
-                    {/* Digər tabların məzmununu burada saxlayın */}
                     <div
-                      className="tab-pane fade"
+                      className={`tab-pane fade ${activeTab === 'orders' ? 'active show' : ''}`}
                       id="orders"
                       role="tabpanel"
                       aria-labelledby="orders-tab"
@@ -184,28 +192,34 @@ const Account = () => {
                                   <th>Actions</th>
                                 </tr>
                               </thead>
-                              {/* <tbody>
-                                {user.orders.map(order => (
-                                  <tr key={order.id}>
-                                    <td>#{order.id}</td>
-                                    <td>{order.date}</td>
-                                    <td>{order.status}</td>
-                                    <td>${order.total} for {order.items} item</td>
-                                    <td>
-                                      <Link to="#" className="btn-small d-block">
-                                        View
-                                      </Link>
-                                    </td>
+                              <tbody>
+                                {orders && orders.length > 0 ? (
+                                  orders.map(order => (
+                                    <tr key={order._id}>
+                                      <td>#{order._id}</td>
+                                      <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                                      <td>{order.isPaid ? 'Paid' : 'Not Paid'}</td>
+                                      <td>${order.totalPrice}</td>
+                                      <td>
+                                        <Link to="#" className="btn-small d-block">
+                                          View
+                                        </Link>
+                                      </td>
+                                    </tr>
+                                  ))
+                                ) : (
+                                  <tr>
+                                    <td colSpan="5">No orders found</td>
                                   </tr>
-                                ))}
-                              </tbody> */}
+                                )}
+                              </tbody>
                             </table>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
-                      className="tab-pane fade"
+                      className={`tab-pane fade ${activeTab === 'track-orders' ? 'active show' : ''}`}
                       id="track-orders"
                       role="tabpanel"
                       aria-labelledby="track-orders-tab"
@@ -257,7 +271,7 @@ const Account = () => {
                       </div>
                     </div>
                     <div
-                      className="tab-pane fade"
+                      className={`tab-pane fade ${activeTab === 'address' ? 'active show' : ''}`}
                       id="address"
                       role="tabpanel"
                       aria-labelledby="address-tab"
@@ -296,7 +310,7 @@ const Account = () => {
                       </div>
                     </div>
                     <div
-                      className="tab-pane fade"
+                      className={`tab-pane fade ${activeTab === 'account-detail' ? 'active show' : ''}`}
                       id="account-detail"
                       role="tabpanel"
                       aria-labelledby="account-detail-tab"
@@ -398,7 +412,6 @@ const Account = () => {
                         </div>
                       </div>
                     </div>
-                    {/* Digər tabların məzmununu burada saxlayın */}
                   </div>
                 </div>
               </div>

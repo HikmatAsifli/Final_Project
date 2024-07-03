@@ -22,7 +22,7 @@ const PopularProducts = () => {
                     style={{ visibility: "visible", animationName: "fadeIn" }}
                 >
                     <h3>Popular Products</h3>
-                    <ul className="nav nav-tabs links" id="myTab" role="tablist">
+                    {/* <ul className="nav nav-tabs links" id="myTab" role="tablist">
                         <li className="nav-item" role="presentation">
                             <button
                                 className="nav-link active"
@@ -121,7 +121,7 @@ const PopularProducts = () => {
                                 Fruits
                             </button>
                         </li>
-                    </ul>
+                    </ul> */}
                 </div>
                 <div className="tab-content" id="myTabContent">
                     {/* Loop through products and render dynamic product cards */}

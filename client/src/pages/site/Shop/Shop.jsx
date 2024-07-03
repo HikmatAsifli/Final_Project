@@ -78,7 +78,7 @@ const Shop = () => {
                                         )
                                         .map((product, index) => (
                                             <div className="col-lg-1-5 col-md-4 col-12 col-sm-6" key={index}>
-                                                <div className="product-cart-wrap mb-30">
+                                                <div className="product-cart-wrap mb-30" style={{height: "420px"}}>
                                                     <div className="product-img-action-wrap">
                                                         <div className="product-img product-img-zoom">
                                                             <Link to={`/products/${product._id}`}>
@@ -86,14 +86,14 @@ const Shop = () => {
                                                                     className="default-img"
                                                                     src={product.image}
                                                                     alt={product.name}
-                                                                    style={{ width: "300px", height: "200px" }}
+                                                                    style={{ height: "200px" }}
                                                                 />
                                                                 {product.hoverImage && (
                                                                     <img
                                                                         className="hover-img"
                                                                         src={product.hoverImage}
                                                                         alt={product.name}
-                                                                        style={{ width: "300px", height: "200px" }}
+                                                                        style={{ height: "200px" }}
                                                                     />
                                                                 )}
                                                             </Link>
@@ -125,7 +125,7 @@ const Shop = () => {
                                                             </Link>
                                                         </div>
                                                         <div className="product-badges product-badges-position product-badges-mrg">
-                                                            <span className="hot">Hot</span>
+                                                            <span className="hot">-{product.discount}%</span>
                                                         </div>
                                                     </div>
                                                     <div className="product-content-wrap">
@@ -202,7 +202,7 @@ const Shop = () => {
                                             placeholder="Search products"
                                         />
                                     </div>
-                                    <div className="sidebar-widget widget-category-2 mb-30">
+                                    {/* <div className="sidebar-widget widget-category-2 mb-30">
                                         <h5 className="section-title style-1 mb-30">Filter By Price ...</h5>
                                         <select className="form-control" value={priceRange} onChange={handlePriceRangeChange}>
                                             <option value="all">All</option>
@@ -211,22 +211,7 @@ const Shop = () => {
                                             <option value="101-200">$101 - $200</option>
                                             <option value="200+">$200+</option>
                                         </select>
-                                    </div>
-                                    <div
-                                        className="banner-img wow fadeIn mb-lg-0 animated d-lg-block d-none"
-                                        style={{ visibility: "hidden", animationName: "none" }}
-                                    >
-                                        <img src="assets/imgs/banner/banner-11.png" alt="" />
-                                        <div className="banner-text">
-                                            <span>Oganic</span>
-                                            <h4>
-                                                Save 17% <br />
-                                                on <span className="text-brand">Oganic</span>
-                                                <br />
-                                                Juice
-                                            </h4>
-                                        </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>

@@ -30,8 +30,8 @@ const About = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />
+    autoplay: true,
+    autoplaySpeed: 1000,
   };
   return (
     <main className="main pages">
@@ -388,7 +388,7 @@ const SampleNextArrow = (props) => {
       style={{ ...style, display: "block", background: "black" }}
       onClick={onClick}
     >
-    <i className="fa-sharp fa-thin fa-angle-right" style={{ color: "green" }}></i>
+      <i className="fa-sharp fa-thin fa-angle-right" style={{ color: "green" }}></i>
     </div>
   );
 };

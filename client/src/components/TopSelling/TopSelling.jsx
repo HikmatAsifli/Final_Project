@@ -23,7 +23,7 @@ const TopSelling = () => {
                     </h6>
                     <div className="product-rate-cover">
                         <div className="product-rate d-inline-block">
-                            <div className="product-rating" style={{ width: `${product.rating * 10}%` }} />
+                            <div className="product-rating" style={{ width: `${product.rating * 20}%` }} />
                         </div>
                         <span className="font-small ml-5 text-muted"> {product.rating}</span>
                     </div>

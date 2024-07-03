@@ -106,11 +106,13 @@ const BestSeller = () => {
     }
 
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 1000,
         nextArrow: <span className="slider-btn slider-next slick-arrow"><i className="fa-sharp fa-thin fa-arrow-right"></i></span>,
         prevArrow: <span className="slider-btn slider-prev slick-arrow"><i className="fa-sharp fa-thin fa-arrow-left"></i></span>,
         responsive: [
@@ -145,7 +147,7 @@ const BestSeller = () => {
             <div className="container">
                 <div className="section-title wow animate__ animate__fadeIn animated" style={{ visibility: 'visible', animationName: 'fadeIn' }}>
                     <h3 className>Daily Best Sells</h3>
-                    <ul className="nav nav-tabs links" id="myTab-2" role="tablist">
+                    {/* <ul className="nav nav-tabs links" id="myTab-2" role="tablist">
                         <li className="nav-item" role="presentation">
                             <button className={`nav-link ${selectedTab === 'featured' ? 'active' : ''}`} onClick={() => setSelectedTab('featured')} type="button" role="tab">Featured</button>
                         </li>
@@ -155,7 +157,7 @@ const BestSeller = () => {
                         <li className="nav-item" role="presentation">
                             <button className={`nav-link ${selectedTab === 'new' ? 'active' : ''}`} onClick={() => setSelectedTab('new')} type="button" role="tab">New added</button>
                         </li>
-                    </ul>
+                    </ul> */}
                 </div>
                 <div className="row">
                     <div className="col-lg-3 d-none d-lg-flex wow animate__ animate__fadeIn animated" style={{ visibility: 'visible', animationName: 'fadeIn' }}>

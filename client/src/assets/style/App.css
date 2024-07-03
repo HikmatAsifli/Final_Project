@@ -1538,6 +1538,9 @@ input.qty-val {
   display: flex;
   gap: 3px;
 }
+.single-hero-slider ,single-animation-wrap .slider-1, .slider-2{
+  position: relative;
+}
 .hero-slider-1 {
   position: relative;
 }
